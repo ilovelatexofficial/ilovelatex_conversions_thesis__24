@@ -1,0 +1,381 @@
+\titleformat
+{\chapter}
+[display]
+{}
+{ \rule{\textwidth}{2pt}
+  \vspace{-2.7ex}
+    \centering
+\MakeUppercase{C\footnotesize{hapitre} \ \Large\thechapter}}
+{0.05ex}
+{
+    \rule{\textwidth}{0.5pt}
+    \vspace{1ex}
+    \centering
+    \bfseries\Large
+}
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{2pt}
+]
+\renewcommand \thesection {\arabic{chapter}.\arabic{section}}
+\renewcommand \thechapter {\arabic{chapter}}
+\fancyhead[LO]{ {\footnotesize\leftmark} }
+\chapter{Étude de l'existant}
+\minitoc
+
+\section{Introduction}
+
+L'étude de l'existant vise à analyser le fonctionnement actuel de la gestion du parc informatique au sein de GERMA GLACES. Elle permet d'identifier les forces et faiblesses des processus en place, d'évaluer le niveau de maturité numérique de l'entreprise et de dégager les besoins fonctionnels nécessaires à la conception du futur système d'information.\par
+
+\section{Objectif du chapitre}
+
+Ce chapitre a pour objectif de comprendre comment la gestion du parc informatique s'effectue aujourd'hui, de mettre en évidence les dysfonctionnements organisationnels, techniques et méthodologiques, et de fournir une base solide pour la conception UML du futur système.\par
+
+\section{Description du parc informatique}
+
+Le parc informatique de GERMA GLACES est composé de l'ensemble des équipements matériels et logiciels utilisés par les différents services de l'entreprise : direction, administratif, commercial, production, logistique et informatique.\par
+
+\textbf{Éléments matériels principaux :}\par
+
+\begin{itemize}
+\item 52 postes utilisateurs (PC fixes et portables)
+\item 3 serveurs (Active Directory, serveur applicatif, serveur de sauvegarde)
+\item 1 NAS de stockage
+\item 6 imprimantes réseau
+\item 3 switches réseau (2 d'accès, 1 cœur de réseau)
+\item 1 routeur / pare-feu
+\item 4 points d'accès Wi-Fi
+\item Licences logicielles (OS, Suite bureautique, outils métiers, antivirus)
+\end{itemize}
+
+Le suivi du matériel est actuellement réalisé au moyen d'un fichier Excel unique, ce qui limite la précision et la fiabilité de l'inventaire.\par
+
+\section{Processus actuels de gestion}
+
+La gestion informatique repose sur trois processus principaux : la déclaration de panne, le traitement des incidents et la mise à jour de l'inventaire. Ces processus sont majoritairement informels et reposent fortement sur la communication orale.\par
+
+\textbf{2.4.1 Déclaration des pannes}\par
+
+L'employé informe un technicien de manière orale, par téléphone ou via un message informel. Aucune trace écrite n'est conservée, ce qui entraîne des oublis, une absence de priorisation et une dépendance à la disponibilité immédiate des techniciens.\par
+
+\textbf{2.4.2 Traitement des incidents}\par
+
+Le technicien se déplace pour diagnostiquer et résoudre le problème. L'intervention n'est pas documentée, aucun historique n'est conservé et aucune analyse des incidents récurrents n'est réalisable.\par
+
+\textbf{2.4.3 Mise à jour de l'inventaire}\par
+
+Le responsable informatique modifie manuellement un fichier Excel lors de l'ajout, du déplacement ou du retrait de matériel. Les données sont souvent incomplètes, obsolètes ou incohérentes.\par
+
+\textbf{2.4.4 Synthèse du processus actuel}\par
+
+Le système actuel ne permet ni traçabilité, ni suivi structuré, ni analyse statistique, rendant difficile toute optimisation.\par
+
+\section{Dysfonctionnements identifiés}
+
+L'analyse approfondie du fonctionnement actuel du parc informatique de GERMA GLACES met en évidence un ensemble de dysfonctionnements touchant à la fois l'organisation, les outils utilisés, la communication interne et la gestion opérationnelle des équipements. Ces dysfonctionnements compromettent la fiabilité de l'infrastructure, la productivité des utilisateurs et la capacité du service informatique à assurer un support efficace. Afin d'offrir une vision claire et structurée, les dysfonctionnements ont été regroupés en cinq grandes catégories.\par
+
+\textbf{2.5.1 Dysfonctionnements organisationnels}\par
+
+Ces dysfonctionnements concernent la structure, les procédures et la responsabilisation des acteurs.\par
+
+\textbf{Problèmes identifiés :}\par
+
+\begin{itemize}
+\item Absence de procédures officiellement documentées pour la gestion du parc informatique.
+\item Aucune définition précise des rôles entre les techniciens et les utilisateurs.
+\item Communication majoritairement informelle, dépendante de la disponibilité des personnes.
+\item Manque de priorisation des demandes selon leur impact métier.
+\end{itemize}
+
+\textbf{Conséquences :}\par
+
+\begin{itemize}
+\item Gestion réactive au lieu d'être proactive.
+\item Retards dans le traitement des pannes critiques.
+\item Charge de travail mal répartie au sein du service informatique.
+\end{itemize}
+
+\textbf{2.5.2 Dysfonctionnements techniques}\par
+
+Ils concernent le matériel, le réseau et les outils logiciels :\par
+
+\textbf{Problèmes identifiés :}\par
+
+\begin{itemize}
+\item Parc hétérogène : coexistence de matériels anciens et récents.
+\item Obsolescence d'une partie des équipements (postes de plus de 5 ans).
+\item Pannes fréquentes sur certains postes non identifiés.
+\item Problèmes ponctuels de connexion réseau ou Wi-Fi dans certaines zones.
+\item Absence d'outils de supervision ou de monitoring.
+\end{itemize}
+
+\textbf{Conséquences :}\par
+
+\begin{itemize}
+\item Ralentissement des activités (ex. impression, facturation, saisie).
+\item Impact direct sur la production et la logistique.
+\item Augmentation des coûts de maintenance non planifiés.
+\end{itemize}
+
+\textbf{2.5.3 Dysfonctionnements liés à la gestion des incidents}\par
+
+Ils représentent le cœur du problème dans la gestion actuelle :\par
+
+\textbf{Problèmes identifiés :}\par
+
+\begin{itemize}
+\item Déclarations de pannes non formalisées (ni formulaires, ni tickets).
+\item Aucune base de données recensant les incidents.
+\item Aucune analyse des pannes récurrentes (pas de MTBF ni MTTR).
+\item Absence d'historique d'interventions techniques.
+\item Intervention dépendante uniquement de la disponibilité immédiate du technicien.
+\end{itemize}
+
+\textbf{Conséquences :}\par
+
+\begin{itemize}
+\item Aucune traçabilité des demandes.
+\item L'utilisateur n'a aucune visibilité sur l'état de sa demande.
+\item Répétition de pannes similaires non diagnostiquées durablement.
+\item Difficulté pour la direction d'évaluer la performance du support informatique.
+\end{itemize}
+
+\textbf{2.5.4 Dysfonctionnements liés à la gestion de l'inventaire}\par
+
+L'inventaire est un élément critique permettant de suivre l'état et la localisation du matériel.\par
+
+\textbf{Problèmes identifiés :}\par
+
+\begin{itemize}
+\item Inventaire sous forme de fichier Excel non sécurisé.
+\item Données incomplètes ou obsolètes : numéros de série, références, affectations.
+\item Plusieurs versions du fichier circulent entre les services.
+\item Absence d'un historique des mouvements d'équipements.
+\item Difficulté d'identifier le stock réellement disponible.
+\end{itemize}
+
+\textbf{Conséquences :}\par
+
+\begin{itemize}
+\item Mauvaise planification des achats de matériel.
+\item Risque d'achat en doublon.
+\item Impossibilité de retracer la vie d'un équipement.
+\item Faible visibilité pour la direction lors des audits internes.
+\end{itemize}
+
+\textbf{2.5.5 Dysfonctionnements liés à la sécurité informatique}\par
+
+Bien que GERMA GLACES ne dispose pas d'un système informatique complexe, plusieurs risques ont été détectés.\par
+
+\textbf{Problèmes identifiés :}\par
+
+\begin{itemize}
+\item Comptes utilisateurs sans politique de mot de passe stricte.
+\item Absence de contrôle centralisé des accès.
+\item Sauvegardes non supervisées dans un tableau de bord unique.
+\item Antivirus non vérifiés régulièrement.
+\item Pas de politique claire de renouvellement du matériel critique.
+\end{itemize}
+
+\textbf{Conséquences :}\par
+
+\begin{itemize}
+\item Risques de failles de sécurité.
+\item Perte possible de données en cas de panne grave.
+\item Difficulté de reconstruction d'un poste en cas d'urgence.
+\end{itemize}
+
+\textbf{2.5.6 Tableau synthétique des principaux dysfonctionnements}\par
+
+\textbf{2.5.7 Analyse approfondie : causes profondes}\par
+
+Les dysfonctionnements actuels trouvent leur origine dans plusieurs facteurs clés :\par
+
+\textbackslash\{\}textbullet\{\} \textbf{1. Absence d'un système centralisé} Tout est dispersé : notes manuscrites, fichiers Excel, messages oraux.\par
+
+\textbackslash\{\}textbullet\{\} \textbf{2. Manque de formalisation} Aucune procédure documentée, aucun workflow.\par
+
+\textbackslash\{\}textbullet\{\} \textbf{3. Charge de travail mal structurée} Une seule personne souvent en charge de tout, sans outils de priorisation.\par
+
+\textbackslash\{\}textbullet\{\} \textbf{4. Parc non uniformisé} Équipements anciens mélangés avec du récent, sans stratégie de renouvellement.\par
+
+\textbf{2.5.8 Conclusion analytique}\par
+
+Les dysfonctionnements recensés montrent que le problème n'est pas seulement technique, mais structurel et organisationnel. Sans un système de gestion centralisé, GERMA GLACES ne peut ni améliorer la performance du support informatique, ni garantir un fonctionnement fluide pour les différents services. Ces constats justifient pleinement la mise en place d'un système d'information de gestion du parc informatique, qui sera défini dans le Chapitre 3.\par
+
+\section{Diagnostic du système actuel}
+
+Le diagnostic révèle que la gestion actuelle n'est ni structurée ni optimisée. Les limitations observées empêchent toute vision globale de l'état du parc et limitent la capacité décisionnelle de l'entreprise. L'absence d'un système centralisé constitue la cause fondamentale des difficultés.\par
+
+\section{Cas d'utilisation de l'existant}
+
+Les cas d'utilisation suivants décrivent le fonctionnement réel du système actuel, tel qu'il est pratiqué quotidiennement par les employés et le service informatique. Ils mettent en évidence les limites opérationnelles et justifient la nécessit é d'un futur système structuré.\par
+
+\subsection{Déclaration de panne}
+
+\textbf{Acteur principal :}\par
+
+• Employé\par
+
+\textbf{But :}\par
+
+Signaler un incident affectant un équipement ou un service informatique afin d'obtenir une intervention.\par
+
+\textbf{Scénario actuel :}\par
+
+\begin{itemize}
+\item L'employé constate une panne (poste, imprimante, réseau...).
+\item Il cherche un technicien disponible ou interroge un collègue.
+\item La panne est communiquée oralement ou via un message informel.
+\item Le technicien note la demande mentalement ou dans un carnet personnel.
+\item Aucune trace officielle n'est conservée.
+\end{itemize}
+
+\textbf{Scénarios alternatifs :}\par
+
+\begin{itemize}
+\item La demande n'est jamais transmise.
+\item Le technicien oublie une demande orale.
+\item Plusieurs demandes arrivent simultanément sans ordre de priorité.
+\end{itemize}
+
+\textbf{Limitations :}\par
+
+\begin{itemize}
+\item Aucune traçabilité.
+\item Priorisation impossible.
+\item Temps de traitement non mesurable.
+\item Pas de statistiques.
+\end{itemize}
+
+\textbf{Conséquence métier :}\par
+
+Dégradation de la qualité du support et retards dans les processus opérationnel s dépendants de l'informatique.\par
+
+\textbf{Diagramme} \textbf{UML} \textbf{:}\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_021.png}
+\caption{Figure 2: CU 1(Existant) Déclarer une panne}
+\label{fig:1}
+\end{figure}
+
+Figure 2 : CU 1( Existant) Déclarer une panne\par
+
+\subsection{Traitement d'une panne}
+
+\textbf{Acteur principal :}\par
+
+• Technicien informatique\par
+
+\textbf{But :}\par
+
+Diagnostiquer et corriger le dysfonctionnement signalé.\par
+
+\textbf{Scénario actuel :}\par
+
+\begin{itemize}
+\item Le technicien reçoit la demande oralement.
+\item Il intervient lorsqu'il est disponible.
+\item Diagnostic rapide basé sur l'expérience.
+\item Correction provisoire ou définitive.
+\item Aucune fiche d'intervention créée.
+\end{itemize}
+
+\textbf{Scénarios alternatifs :}\par
+
+\begin{itemize}
+\item Intervention immédiate si le problème bloque la production.
+\item Intervention oubliée faute de suivi.
+\item Problème résolu mais non signalé au demandeur.
+\item Récurrence d'incidents faute de diagnostic structuré.
+\end{itemize}
+
+\textbf{Limitations :}\par
+
+\begin{itemize}
+\item Aucun historique des interventions.
+\item Impossible d'identifier les équipements problématiques.
+\item Pas de MTTR → pas de pilotage des performances.
+\end{itemize}
+
+\textbf{Impact métier :}\par
+
+Difficulté à évaluer la qualité du support technique et à planifier la maintenance.\par
+
+\textbf{Diagramme} \textbf{UML:}\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_015.png}
+\caption{Figure 3: CU2 (Existant) traiter une panne}
+\label{fig:2}
+\end{figure}
+
+Figure 3 : CU2 (Existant) traiter une panne\par
+
+\subsection{Mise à jour de l'inventaire}
+
+\textbf{Acteur principal :}\par
+
+• Responsable informatique\par
+
+\textbf{But :}\par
+
+Maintenir un inventaire fiable et à jour du parc informatique.\par
+
+\textbf{Scénario actuel :}\par
+
+\begin{itemize}
+\item Ajout manuel du matériel dans un fichier Excel.
+\item Mise à jour réalisée de manière occasionnelle.
+\item Matériel obsolète toujours présent dans le fichier.
+\item Données incomplètes.
+\end{itemize}
+
+\textbf{Scénarios alternatifs :}\par
+
+\begin{itemize}
+\item Plusieurs versions du fichier circulent.
+\item Modifications non autorisées.
+\item Perte d'informations lors des mises à jour.
+\end{itemize}
+
+\textbf{Limitations :}\par
+
+\begin{itemize}
+\item Inventaire incohérent.
+\item Aucun suivi des mouvements.
+\item Risque d'achat en doublon.
+\item Aucune visibilité sur le cycle de vie.
+\end{itemize}
+
+\textbf{Conséquence stratégique :}\par
+
+L'entreprise ne peut pas baser ses décisions sur un inventaire fiable.\par
+
+\textbf{Diagramme UML (} \textbf{PlantUML} \textbf{) :}\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_007.png}
+\caption{Figure 4: CU 3 (Existant) Mettre à jour l'inventaire}
+\label{fig:3}
+\end{figure}
+
+Figure 4 : CU 3 ( Existant) Mettre à jour l'inventaire\par
+
+\section{Suggestions d'amélioration}
+
+\begin{itemize}
+\item Digitalisation des déclarations de pannes
+\item Mise en place d'un système d'information centralisé
+\item Inventaire automatisé et structuré
+\item Tableau de bord pour la direction
+\item Mise en place d'un système de rôles et permissions
+\end{itemize}
+
+\section{Conclusion du chapitre}
+
+L'étude de l'existant met en évidence l'absence de procédures formelles, les limites des outils actuellement utilisés et le manque de visibilité globale sur l'état du parc informatique. Ces constats justifient entièrement la conception d'un système d'information moderne et structuré, présenté dans le chapitre suivant.\par
