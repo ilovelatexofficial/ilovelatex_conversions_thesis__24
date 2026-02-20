@@ -1,0 +1,1728 @@
+\titleformat
+{\chapter}
+[display]
+{}
+{ \rule{\textwidth}{2pt}
+  \vspace{-2.7ex}
+    \centering
+\MakeUppercase{C\footnotesize{hapitre} \ \Large\thechapter}}
+{0.05ex}
+{
+    \rule{\textwidth}{0.5pt}
+    \vspace{1ex}
+    \centering
+    \bfseries\Large
+}
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{2pt}
+]
+\renewcommand \thesection {\arabic{chapter}.\arabic{section}}
+\renewcommand \thechapter {\arabic{chapter}}
+\fancyhead[LO]{ {\footnotesize\leftmark} }
+\chapter{Étude conceptuelle UML du futur système}
+\minitoc
+
+\section{Introduction du chapitre}
+
+l e présent chapitre est consacré à l'étude conceptuelle du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. Il s'inscrit dans la continuité directe de l'étude de l'existant présentée au chapitre précédent et vise à proposer une modélisation claire et structurée du système à concevoir.\par
+
+L'objectif principal de cette étude conceptuelle est de définir les fonctionnalités du futur système, d'identifier les acteurs impliqués et de représenter les interactions entre ces acteurs et le système à l'aide du langage UML ( Unified Modeling Language ). Cette démarche permet d'abstraire les aspects techniques de l'implémentation afin de se concentrer sur les besoins fonctionnels et organisationnels.\par
+
+La modélisation UML constitue une étape essentielle dans le processus de conception d'un système d'information. Elle facilite la compréhension globale du système, améliore la communication entre les différents intervenants du projet et sert de base aux phases ultérieures de conception détaillée et de réalisation.\par
+
+Dans ce chapitre, plusieurs diagrammes UML seront utilisés afin de représenter les différents points de vue du futur système, notamment les diagrammes de cas d'utilisation, de classes et de séquence. Ces diagrammes permettront de formaliser les exigences fonctionnelles identifiées et de proposer une solution cohérente et adaptée aux besoins de l'entreprise GERMA GLACES.\par
+
+\section{Présentation générale du langage UML}
+
+Le langage UML ( Unified Modeling Language ) est un langage de modélisation graphique standardisé, largement utilisé dans le domaine du génie logiciel et des systèmes d'information. Il permet de représenter de manière visuelle, précise et structurée les différents aspects d'un système, indépendamment des technologies d'implémentation. UML constitue aujourd'hui un outil incontournable dans les phases d'analyse et de conception des systèmes informatiques.\par
+
+\subsection{Définition et objectifs du langage UML}
+
+UML est défini comme un langage de modélisation visuelle permettant de spécifier, de visualiser, de construire et de documenter les artefacts d'un système logiciel. Il ne s'agit ni d'une méthode de développement ni d'un langage de programmation, mais d'un langage de description graphique.\par
+
+Les principaux objectifs du langage UML sont :\par
+
+- Fournir une représentation claire et compréhensible du système.\par
+
+- Permettre l'identification et l'analyse des besoins fonctionnels.\par
+
+- Faciliter la communication entre les différents intervenants d'un projet.\par
+
+- Servir de base à la conception détaillée et à l'implémentation.\par
+
+- Améliorer la qualité et la maintenabilité des systèmes développés.\par
+
+\subsection{Historique et standardisation de l'UML}
+
+Le langage UML est né de la volonté d'unifier plusieurs méthodes de modélisation existantes dans les années 1990, notamment celles de Booch , OMT (Object Modeling Technique) et OOSE (Object- Oriented Software Engineering). Cette unification a été menée par Grady Booch , James Rumbaugh et Ivar Jacobson.\par
+
+En 1997, UML a été adopté comme standard par l'OMG (Object Management Group), un consortium international chargé de la standardisation des technologies orientées objet. Depuis, UML a connu plusieurs évolutions visant à enrichir ses notations et à améliorer sa capacité à modéliser des systèmes de plus en plus complexes.\par
+
+Aujourd'hui, UML est reconnu comme un standard international et largement utilisé dans les projets de développement de systèmes d'information, quel que soit le domaine d'application.\par
+
+\subsection{Principaux types de diagrammes UML}
+
+UML propose un ensemble varié de diagrammes permettant de représenter différents points de vue d'un système. Ces diagrammes sont généralement classés en deux grandes catégories : les diagrammes structurels et les diagrammes comportementaux.\par
+
+Parmi les diagrammes les plus utilisés, on distingue :\par
+
+- Les diagrammes de cas d'utilisation, qui décrivent les interactions entre les acteurs et le système.\par
+
+- Les diagrammes de classes, qui représentent la structure statique du système.\par
+
+- Les diagrammes de séquence, qui illustrent les échanges de messages entre les objets.\par
+
+- Les diagrammes d'activité, qui modélisent les flux de traitement.\par
+
+- Les diagrammes d'états-transitions, qui décrivent le comportement dynamique d'un objet.\par
+
+\subsection{Intérêt de l'UML dans la modélisation des systèmes d'information}
+
+L'utilisation du langage UML présente plusieurs avantages dans la modélisation des systèmes d'information. Elle permet tout d'abord de clarifier les exigences fonctionnelles en offrant une représentation visuelle accessible à tous les acteurs du projet.\par
+
+UML favorise également la détection précoce des incohérences et des erreurs de conception, ce qui contribue à réduire les coûts et les délais de développement. En outre, les modèles UML constituent une documentation durable du système, facilitant sa maintenance et son évolution future.\par
+
+Dans le cadre de ce mémoire, UML est utilisé comme outil principal de modélisation afin de structurer l'analyse et la conception du futur système de gestion du parc informatique de l'entreprise GERMA GLACES.\par
+
+\section{Identification des acteurs}
+
+Dans le cadre de la modélisation du futur système de gestion du parc informatique de l'entreprise GERMA GLACES, l'identification des acteurs constitue une étape essentielle. Un acteur représente une entité externe au système qui interagit avec celui-ci afin d'accomplir une ou plusieurs tâches.\par
+
+L'analyse des besoins fonctionnels du futur système a permis d'identifier trois acteurs principaux, chacun disposant de rôles et de responsabilités spécifiques. Ces acteurs interagissent avec le système selon leurs droits et leurs missions au sein de l'entreprise.\par
+
+\textbf{Administrateur du système}\par
+
+L'administrateur du système est responsable de la gestion globale du système. Il dispose de privilèges étendus lui permettant de gérer les utilisateurs, les équipements informatiques et d'accéder à des fonctionnalités avancées telles que la consultation de l'état global du parc et la génération de rapports. Il assure également le bon fonctionnement et la sécurité du système.\par
+
+\textbf{Responsable informatique}\par
+
+Le responsable informatique intervient principalement dans la gestion opérationnelle du parc informatique. Il est chargé de l'affectation du matériel aux employés, du suivi de l'état des équipements, du traitement des pannes signalées et de la planification des opérations de maintenance. Son rôle est central dans le maintien de la disponibilité et de la performance des ressources informatiques.\par
+
+\textbf{Employé}\par
+
+L'employé est un utilisateur du système disposant de droits limités. Il peut consulter le matériel informatique qui lui est affecté et déclarer une panne en cas de dysfonctionnement. Son interaction avec le système permet d'assurer une remontée rapide des incidents et contribue à une meilleure gestion du parc informatique.\par
+
+\section{Diagramme de cas d'utilisation du futur système}
+
+\subsection{Présentation générale}
+
+Le diagramme de cas d'utilisation constitue un élément central de la modélisation fonctionnelle du futur système de gestion du parc informatique. Il permet de représenter, de manière globale et synthétique, les différentes fonctionnalités offertes par le système ainsi que les interactions entre ces fonctionnalités et les acteurs identifiés précédemment.\par
+
+Ce type de diagramme met l'accent sur les besoins fonctionnels du système du point de vue des utilisateurs. Il décrit ce que le système doit faire, sans s'intéresser aux détails techniques de l'implémentation. Ainsi, le diagramme de cas d'utilisation facilite la compréhension des exigences fonctionnelles et permet de valider que l'ensemble des besoins exprimés est correctement pris en compte.\par
+
+Dans le cadre de ce mémoire, le diagramme de cas d'utilisation du futur système a été élaboré à partir de l'analyse de l'existant et de l'expression des besoins identifiés. Il intègre les différentes actions réalisées par les acteurs du système, notamment l'administrateur du système, le responsable informatique et l'employé, en fonction de leurs rôles respectifs.\par
+
+Ce diagramme constitue également une base de référence pour les étapes ultérieures de la conception, en particulier pour l'élaboration des diagrammes de classes et des diagrammes de séquence. Il assure une cohérence globale entre les différentes vues du système et contribue à une modélisation claire et structurée du futur système de gestion du parc informatique de l'entreprise GERMA GLACES.\par
+
+\subsection{Identification des cas d'utilisation}
+
+L'identification des cas d'utilisation du futur système de gestion du parc informatique a pour objectif de recenser l'ensemble des fonctionnalités que le système devra offrir aux différents acteurs identifiés. Chaque cas d'utilisation correspond à une action ou à un ensemble d'actions réalisées par un acteur afin d'atteindre un objectif précis.\par
+
+Les cas d'utilisation ont été définis à partir de l'analyse de l'existant et de l'expression des besoins du futur système. Ils sont nommés à l'aide de verbes à l'infinitif, conformément aux recommandations UML, afin de décrire clairement les actions effectuées par les acteurs.\par
+
+\subsection{Cas d'utilisation de l'Administrateur du système}
+
+L'administrateur du système dispose de fonctionnalités liées à la gestion globale et à l'administration du futur système. Les cas d'utilisation qui lui sont associés sont les suivants :\par
+
+\begin{itemize}
+\item Gérer les utilisateurs
+\item Gérer les équipements informatiques
+\item Consulter l'état global du parc
+\item Générer des rapports
+\end{itemize}
+
+\subsection{Cas d'utilisation du Responsable informatique}
+
+Le responsable informatique intervient principalement dans la gestion opérationnelle du parc informatique et le suivi des équipements. Les cas d'utilisation associés à cet acteur sont :\par
+
+\begin{itemize}
+\item Affecter le matériel
+\item Suivre l'état des équipements
+\item Traiter une panne
+\item Planifier les opérations de maintenance
+\end{itemize}
+
+\subsection{Cas d'utilisation de l'Employé}
+
+L'employé interagit avec le système de manière plus restreinte, essentiellement pour consulter les informations relatives au matériel qui lui est attribué et signaler les incidents. Les cas d'utilisation qui lui sont associés sont :\par
+
+\begin{itemize}
+\item Consulter le matériel affecté
+\item Déclarer une panne
+\end{itemize}
+
+L'ensemble de ces cas d'utilisation permet de couvrir les besoins fonctionnels essentiels du futur système de gestion du parc informatique. Ils constituent la base de l'élaboration du diagramme de cas d'utilisation global présenté dans la section suivante.\par
+
+\subsection{Diagramme de cas d'utilisation global}
+
+Le diagramme de cas d'utilisation global du futur système de gestion du parc informatique permet de représenter, de manière synthétique, l'ensemble des interactions entre les acteurs identifiés et les fonctionnalités offertes par le système. Il fournit une vue d'ensemble du périmètre fonctionnel du système et met en évidence les rôles respectifs de chaque acteur.\par
+
+Ce diagramme intègre les trois acteurs principaux du système, à savoir l'administrateur du système, le responsable informatique et l'employé. Chaque acteur est associé aux cas d'utilisation correspondant à ses missions et à ses responsabilités au sein de l'entreprise. Cette représentation permet de visualiser clairement les droits d'accès et les interactions possibles avec le système.\par
+
+Le diagramme de cas d'utilisation global constitue un support essentiel pour la compréhension du fonctionnement général du futur système. Il permet de vérifier la cohérence des cas d'utilisations identifiées et de s'assurer que l'ensemble des besoins fonctionnels exprimés est bien pris en compte. De plus, il sert de référence pour la description détaillée des cas d'utilisation présentée dans la section suivante.\par
+
+Dans le cadre de ce mémoire, le diagramme de cas d'utilisation global a été enrichi par l'utilisation des relations « include » et « extend », permettant de mettre en évidence les dépendances et les extensions entre certains cas d'utilisation. Cette approche contribue à une modélisation plus précise et plus structurée du futur système de gestion du parc informatique de l'entreprise GERMA GLACES.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_001.png}
+\caption{Figure 4}
+\label{fig:4}
+\end{figure}
+
+Figure 5 : Diagramme de cas d'utilisation global du futur système\par
+
+\subsection{Description textuelle des cas d'utilisation}
+
+Cette section décrit de manière détaillée les cas d'utilisation identifiés pour le futur système d e gestion du parc informatique. Chaque cas d'utilisation est présenté sous forme d'une fiche descriptive (acteur, objectif, pré/postconditions, scénario nominal, exceptions, règles) et est suivi de \textbf{son diagramme} \textbf{PlantUML} , prêt à intégrer dans le mémoire.\par
+
+\subsubsection{CU1 – Gérer les utilisateurs}
+
+\textbf{Acteur principal :} Administrateur du système \textbf{But :} Créer, modifier, désactiver/supprimer des comptes utilisateurs et gérer les rôles/droits. \textbf{Déclencheur :} Arrivée/départ d'un employé, changement de rôle, besoin de sécurisation des accès. \textbf{Préconditions :} Administrateur authentifié et autorisé. \textbf{Postconditions :} Comptes et droits mis à jour, opération tracée (date/auteur). \textbf{Données manipulées :} Identité, identifiant, rôle, état du compte (actif/inactif). \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'administrateur accède au module “Utilisateurs”.
+\item Il choisit : créer / modifier / désactiver.
+\item Il saisit ou met à jour les informations et le rôle.
+\item Le système valide les données.
+\item Le système enregistre et confirme l'opération. \textbf{Exceptions :}
+\item Identifiant déjà existant → rejet et message.
+\item Données invalides/incomplètes → erreur et correction.
+\item Suppression impossible (historique à conserver) → désactivation. \textbf{Règles métier :}
+\item Identifiant unique.
+\item Désactivation privilégiée à la suppression.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_019.png}
+\caption{Figure 6: Cas d'utilisation – Gérer les utilisateurs}
+\label{fig:5}
+\end{figure}
+
+Figure 6 : Cas d'utilisation – Gérer les utilisateurs\par
+
+\subsubsection{CU2 – Gérer les équipements informatiques}
+
+\textbf{Acteur principal :} Administrateur du système \textbf{But :} Ajouter, modifier, retirer un équipement (inventaire). \textbf{Déclencheur :} Acquisition, réforme, mise à jour de caractéristiques, changement d'état/localisation. \textbf{Préconditions :} Administrateur authentifié. \textbf{Postconditions :} Inventaire mis à jour, équipement traçable. \textbf{Données manipulées :} Code inventaire, type, marque/modèle, n° série, état, localisation, date d'acquisition. \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'administrateur ouvre le module “Équipements”.
+\item Il ajoute ou modifie un équipement.
+\item Le système contrôle l'unicité (code inventaire / n° série).
+\item Le système enregistre et confirme. \textbf{Exceptions :}
+\item Doublon (code/n° série) → rejet.
+\item Champs invalides → erreur. \textbf{Règles métier :}
+\item Un équipement possède un identifiant unique.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_008.png}
+\caption{Figure 7 : Cas d'utilisation – Gérer les équipements informatiques}
+\label{fig:6}
+\end{figure}
+
+Figure 7 : Cas d'utilisation – Gérer les équipements informatiques\par
+
+\subsubsection{CU3 – Consulter l'état global du parc}
+
+\textbf{Acteur principal :} Administrateur du système \textbf{But :} Visualiser une synthèse de l'état du parc (disponible, affecté, panne, maintenance...). \textbf{Déclencheur :} Besoin de pilotage, contrôle, reporting interne. \textbf{Préconditions :} Administrateur authentifié. \textbf{Postconditions :} Aucune modification des données. \textbf{Données consultées :} Statuts, répartition, affectations, pannes ouvertes, indicateurs. \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'administrateur accède au tableau de bord.
+\item Le système affiche les indicateurs et listes synthétiques.
+\item L'administrateur applique des filtres (service, période, statut). \textbf{Exceptions :}
+\item Aucune donnée → affichage vide + message.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_004.png}
+\caption{Figure 8: Cas d'utilisation – Consulter l'état global du parc}
+\label{fig:7}
+\end{figure}
+
+Figure 8 : Cas d'utilisation – Consulter l'état global du parc\par
+
+\subsubsection{CU4 – Générer des rapports}
+
+\textbf{Acteur principal :} Administrateur du système \textbf{But :} Générer des rapports (inventaire, pannes, affectations, statistiques). \textbf{Déclencheur :} Besoin d'édition périodique ou à la demande. \textbf{Préconditions :} Administrateur authentifié. \textbf{Postconditions :} Rapport généré et consultable/exportable. \textbf{Relation UML :} \textless{}\textless{} include \textgreater{}\textgreater{} Consulter l'état global du parc \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'administrateur choisit le type de rapport.
+\item Il définit les paramètres (période, service, statut...).
+\item Le système collecte les données et génère le rapport.
+\item Le système affiche le résultat / propose export.
+\end{itemize}
+
+\textbf{Exceptions :}\par
+
+\begin{itemize}
+\item Paramètres incohérents → erreur.
+\item Données insuffisantes → rapport vide avec mention.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_022.png}
+\caption{Figure 9: Cas d'utilisation – Générer des rapports}
+\label{fig:8}
+\end{figure}
+
+Figure 9 : Cas d'utilisation – Générer des rapports\par
+
+\subsubsection{CU5 – Affecter le matériel}
+
+\textbf{Acteur principal :} Responsable informatique \textbf{But :} Affecter un équipement à un employé (ou service). \textbf{Déclencheur :} Nouvel arrivant, remplacement, réaffectation. \textbf{Préconditions :} Responsable authentifié ; matériel disponible. \textbf{Postconditions :} Affectation enregistrée (date/auteur) ; état matériel = “affecté”. \textbf{Relation UML :} \textless{}\textless{} include \textgreater{}\textgreater{} Suivre l'état des équipements \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item Le responsable recherche un matériel disponible.
+\item Il sélectionne l'équipement.
+\item Il sélectionne le bénéficiaire.
+\item Le système enregistre l'affectation et met à jour l'état.
+\end{itemize}
+
+\textbf{Exceptions :}\par
+
+\begin{itemize}
+\item Matériel déjà affecté → refus.
+\item Bénéficiaire introuvable → erreur. \textbf{Règles métier :}
+\item Un équipement ne peut être affecté qu'à un seul bénéficiaire à la fois (règle retenue).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_016.png}
+\caption{Figure 10: Cas d'utilisation – Affecter le matériel}
+\label{fig:9}
+\end{figure}
+
+Figure 10 : Cas d'utilisation – Affecter le matériel\par
+
+\subsubsection{CU6 – Suivre l'état des équipements}
+
+\textbf{Acteur principal :} Responsable informatique \textbf{But :} Consulter l'état détaillé et l'historique des équipements. \textbf{Déclencheur :} Vérification avant affectation / suivi / maintenance. \textbf{Préconditions :} Responsable authentifié. \textbf{Postconditions :} Aucune modification. \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item Le responsable consulte la liste des équipements.
+\item Il filtre/recherche un équipement.
+\item Le système affiche l'état, l'affectation, et l'historique pertinent.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_011.png}
+\caption{Figure 11: Cas d'utilisation – Suivre l'état des équipements}
+\label{fig:10}
+\end{figure}
+
+Figure 11 : Cas d'utilisation – Suivre l'état des équipements\par
+
+\subsubsection{CU7 – Traiter une panne}
+
+\textbf{Acteur principal :} Responsable informatique \textbf{But :} Prendre en charge une panne (diagnostic, actions, clôture). \textbf{Déclencheur :} Déclaration d'une panne par un employé. \textbf{Préconditions :} Panne existante (ouverte) ; responsable authentifié. \textbf{Postconditions :} Statut panne mis à jour ; historique enregistré. \textbf{Relation UML :} \textless{}\textless{} include \textgreater{}\textgreater{} Suivre l'état des équipements \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item Le responsable consulte la liste des pannes ouvertes.
+\item Il sélectionne une panne.
+\item Il réalise le diagnostic et l'action de traitement.
+\item Il met à jour le statut et les commentaires.
+\item Le système enregistre et confirme. \textbf{Exceptions :}
+\item Panne introuvable / déjà clôturée → message.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_026.png}
+\caption{Figure 12: Cas d'utilisation – Traiter une panne}
+\label{fig:11}
+\end{figure}
+
+Figure 12 : Cas d'utilisation – Traiter une panne\par
+
+\subsubsection{CU8 – Planifier les opérations de maintenance}
+
+\textbf{Acteur principal :} Responsable informatique \textbf{But :} Planifier une maintenance préventive ou corrective. \textbf{Déclencheur :} Besoin identifié suite à panne ou planning interne. \textbf{Préconditions :} Responsable authentifié. \textbf{Postconditions :} Opération planifiée et enregistrée. \textbf{Relation UML :} \textless{}\textless{} extend \textgreater{}\textgreater{} Traiter une panne \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item Le responsable décide de planifier une maintenance.
+\item Il saisit les informations (date, équipement, actions prévues).
+\item Le système enregistre la planification.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_026.png}
+\caption{Figure 13: Cas d'utilisation – Planifier les opérations de maintenance}
+\label{fig:12}
+\end{figure}
+
+Figure 13 : Cas d'utilisation – Planifier les opérations de maintenance\par
+
+\subsubsection{CU9 – Consulter le matériel affecté}
+
+\textbf{Acteur principal :} Employé \textbf{But :} Consulter la liste et les détails du matériel qui lui est affecté. \textbf{Déclencheur :} Besoin d'identification du matériel (usage, panne). \textbf{Préconditions :} Employé authentifié. \textbf{Postconditions :} Aucune modification. \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'employé accède à son espace.
+\item Le système affiche le matériel affecté et ses informations.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_002.png}
+\caption{Figure 14: Cas d'utilisation – Consulter le matériel affecté}
+\label{fig:13}
+\end{figure}
+
+Figure 14 : Cas d'utilisation – Consulter le matériel affecté\par
+
+\subsubsection{CU10 – Déclarer une panne}
+
+\textbf{Acteur principal :} Employé \textbf{But :} Déclarer une panne sur un équipement affecté. \textbf{Déclencheur :} Dysfonctionnement constaté. \textbf{Préconditions :} Employé authentifié ; au moins un matériel affecté. \textbf{Postconditions :} Panne enregistrée (statut “ouverte”) et traçable. \textbf{Relation UML :} \textless{}\textless{} include \textgreater{}\textgreater{} Consulter le matériel affecté \textbf{Scénario nominal :}\par
+
+\begin{itemize}
+\item L'employé sélectionne l'équipement concerné.
+\item Il décrit la panne (symptômes, contexte).
+\item Il valide l'envoi.
+\item Le système enregistre et confirme. \textbf{Exceptions :}
+\item Aucun matériel affecté → déclaration impossible.
+\item Description vide → erreur.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_023.png}
+\caption{Figure 15: Cas d'utilisation – Déclarer une panne}
+\label{fig:14}
+\end{figure}
+
+Figure 15 : Cas d'utilisation – Déclarer une panne\par
+
+\subsubsection{CU11 – Proposer à la réforme}
+
+\textbf{Acteur principal :}\par
+
+\begin{itemize}
+\item Responsable informatique
+\end{itemize}
+
+\textbf{Acteur secondaire :}\par
+
+\begin{itemize}
+\item Administrateur du système
+\end{itemize}
+
+\textbf{But :} Proposer la mise à la réforme d'un équipement informatique devenu obsolète, irréparable ou dont le coût de maintenance est jugé excessif, afin de permettre une décision formelle et tracée.\par
+
+\textbf{Déclencheur :}\par
+
+\begin{itemize}
+\item Pannes répétitives sur un même équipement
+\item Obsolescence technique constatée
+\item Coût de maintenance élevé
+\item Fin de cycle de vie du matériel
+\end{itemize}
+
+\textbf{Préconditions :}\par
+
+\begin{itemize}
+\item Responsable informatique authentifié
+\item Équipement existant dans l'inventaire du système
+\end{itemize}
+
+\textbf{Postconditions :}\par
+
+\begin{itemize}
+\item Une demande de réforme est enregistrée dans le système
+\item Le statut de la demande est défini (en attente / validée / rejetée)
+\item La décision est tracée (date, auteur, commentaire)
+\item En cas de validation, l'état de l'équipement est mis à jour (réformé)
+\end{itemize}
+
+\textbf{Scénario nominal}\par
+
+\begin{itemize}
+\item Le responsable informatique accède à la liste des équipements.
+\item Il sélectionne un équipement concerné.
+\item Il choisit l'action « Proposer à la réforme ».
+\item Il renseigne le motif de la demande (obsolescence, irréparable, coût...).
+\item Le système enregistre la demande avec le statut « en attente ».
+\item L'administrateur du système consulte la demande.
+\item L'administrateur valide la demande.
+\item Le système met à jour l'état de l'équipement en « réformé » et clôture la demande.
+\end{itemize}
+
+\textbf{Scénarios alternatifs}\par
+
+\begin{itemize}
+\item \textbf{Rejet de la demande} : L'administrateur rejette la proposition avec justification ; l'équipement conserve son état initial.
+\item \textbf{Demande incomplète} : Le système refuse l'enregistrement et demande la complétion des informations obligatoires.
+\item \textbf{Équipement déjà réformé} : Le système bloque l'action et affiche un message d'erreur.
+\end{itemize}
+
+\textbf{Règles métier}\par
+
+\begin{itemize}
+\item Un équipement déjà réformé ne peut plus faire l'objet d'une nouvelle demande.
+\item Toute décision de réforme doit être validée par l'administrateur du système.
+\item Les demandes de réforme sont conservées à des fins de traçabilité et d'audit.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_017.png}
+\caption{Figure 16: Proposer à la réforme}
+\label{fig:15}
+\end{figure}
+
+Figure 16 : Proposer à la réforme\par
+
+\section{Diagramme de classes conceptuel}
+
+\subsection{Présentation générale}
+
+Le diagramme de classes constitue un élément central de l'étude conceptuelle du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. Il permet de représenter, de manière structurée et statique, les entités métiers du système ainsi que les relations existantes entre elles. Contrairement aux diagrammes de cas d'utilisation, qui décrivent les fonctionnalités du point de vue des acteurs, le diagramme de classes met l'accent sur l'organisation des données et sur les concepts fondamentaux manipulés par le système.\par
+
+Dans le cadre de ce projet, le diagramme de classes conceptuel vise à fournir une vision globale et cohérente du modèle métier, indépendamment de toute considération technique liée à l'implémentation ou au choix du système de gestion de base de données. Il sert de support à la compréhension du fonctionnement interne du futur système et constitue une base essentielle pour les étapes ultérieures de conception détaillée et de réalisation.\par
+
+L'élaboration de ce diagramme s'appuie directement sur :\par
+
+\begin{itemize}
+\item les besoins fonctionnels identifiés lors de l'étude de l'existant,
+\item les cas d'utilisation du futur système (CU1 à CU11),
+\item les règles métiers propres à l'entreprise GERMA GLACES,
+\item ainsi que sur les principes de bonne modélisation visant à assurer la cohérence, la lisibilité et l'évolutivité du système.
+\end{itemize}
+
+Une attention particulière a été portée à la structuration du modèle autour de l'équipement informatique, considéré comme l'élément pivot du système. L'ensemble des processus de gestion (affectation, suivi de l'état, déclaration de pannes, interventions, maintenance, acquisition et mise à la réforme) s'articule autour de cette entité centrale. Cette approche permet de garantir une traçabilité complète du cycle de vie des équipements, depuis leur acquisition jusqu'à leur retrait du parc.\par
+
+Enfin, le diagramme de classes proposé intègre des choix de modélisation visant à limiter les redondances de données et à faciliter une future normalisation du modèle lors de la conception de la base de données. Ces choix contribueront à assurer la fiabilité des informations, la cohérence des traitements et la pérennité du système de gestion du parc informatique.\par
+
+\subsection{Dictionnaire des données (données épurées)}
+
+Cette section a pour objectif de définir de manière claire et structurée l'ensemble des données métiers manipulées par le futur système de gestion du parc informatique. Le dictionnaire des données constitue une étape essentielle entre l'analyse fonctionnelle et la modélisation conceptuelle, en permettant de préciser la signification des informations, leurs contraintes principales et leur lien avec les fonctionnalités du système.\par
+
+Dans le cadre de ce projet, le dictionnaire des données est volontairement limité à des \textbf{données épurées} , c'est-à-dire aux informations ayant une valeur métier directe. Les données purement techniques ou liées à l'implémentation sont volontairement exclues afin de conserver un niveau d'abstraction conforme à une étude conceptuelle UML.\par
+
+Les données présentées ci-dessous sont directement issues des besoins fonctionnels identifiés, des cas d'utilisation du futur système (CU1 à CU11) et des règles métiers propres à l'entreprise GERMA GLACES.\par
+
+\subsubsection{Principes d'épuration des données}
+
+L'épuration des données repose sur les principes suivants :\par
+
+\begin{itemize}
+\item seules les données nécessaires à la gestion métier du parc informatique sont prises en compte ;
+\item chaque donnée doit posséder une signification claire et non ambiguë ;
+\item les redondances sont évitées afin de faciliter la cohérence et la future normalisation ;
+\item les aspects techniques liés à l'implémentation sont exclus à ce stade de l'étude.
+\end{itemize}
+
+Ces principes permettent de construire un modèle conceptuel fiable, lisible et évolutif.\par
+
+\subsubsection{Tableau récapitulatif global des données}
+
+Le tableau suivant présente une vue synthétique de l'ensemble des données manipulées par le futur système, en les reliant aux principales entités métier.\par
+
+\subsubsection{Dictionnaire détaillé des données par entité}
+
+\textbf{Entité : Utilisateur}\par
+
+\textbf{Entité : Rôle}\par
+
+\textbf{Entité : Équipement}\par
+
+\textbf{Entité :} \textbf{TypeEquipement}\par
+
+\textbf{Entité : Marque}\par
+
+\textbf{Entité : Modèle}\par
+
+\textbf{Entité : Affectation}\par
+
+\textbf{Entité : Panne}\par
+
+\textbf{Entité : Intervention}\par
+
+\textbf{Entité : Maintenance}\par
+
+\textbf{Entité : Fournisseur}\par
+
+\textbf{Entité :} \textbf{BonAcquisition}\par
+
+\textbf{Entité : Article}\par
+
+\textbf{Entité :} \textbf{NomenclatureEquipement}\par
+
+\subsection{Identification des classes principales}
+
+Cette section a pour objectif d'identifier et de structurer les principales classes du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. Ces classes représentent les \textbf{entités métiers fondamentales} manipulées par le système et ont été déterminées à partir :\par
+
+\begin{itemize}
+\item de l'analyse des besoins fonctionnels,
+\item des cas d'utilisation du futur système (CU1 à CU11),
+\item du dictionnaire des données établi en section 3.5.2,
+\item des règles métiers propres à l'entreprise.
+\end{itemize}
+
+L'identification des classes est réalisée à un \textbf{niveau conceptuel} , conformément aux principes de modélisation UML. Elle vise à répondre à la question \textbf{« quoi modéliser ? »} , sans entrer dans les détails techniques d'implémentation (types de données, clés techniques, mécanismes logiciels).\par
+
+Afin d'améliorer la lisibilité et la cohérence du modèle, les classes identifiées sont regroupées par \textbf{domaines fonctionnels} , chacun correspondant à un ensemble homogène de responsabilités au sein du futur système.\par
+
+\subsubsection{Domaine “Sécurité et gestion des accès”}
+
+Ce domaine regroupe les classes liées à l'authentification, à l'autorisation et à la gestion des droits des utilisateurs du système.\par
+
+\begin{itemize}
+\item \textbf{Classe Utilisateur} Représente toute personne utilisant le système (administrateur, responsable informatique ou employé). Elle permet d'identifier les utilisateurs et de gérer l'accès aux fonctionnalités du système.
+\item \textbf{Cl} \textbf{asse} \textbf{Rôle} Définit les différents profils d'accès au système. Chaque rôle correspond à un ensemble de droits et de responsabilités, déterminant les actions que l'utilisateur est autorisé à effectuer.
+\end{itemize}
+
+\subsubsection{Domaine “Parc informatique” (pivot : Équipement)}
+
+Ce domaine constitue le cœur du système. Il regroupe les classes décrivant les équipements informatiques et leurs caractéristiques.\par
+
+\begin{itemize}
+\item \textbf{Classe Équipement} Représente un élément matériel du parc informatique (poste, imprimante, serveur, équipement réseau, etc.). Cette classe est considérée comme le \textbf{pivot du système} , car l'ensemble des processus de gestion (affectation, panne, maintenance, acquisition, réforme) s'articule autour d'elle.
+\item \textbf{Classe} \textbf{TypeEquipement} Permet de catégoriser les équipements selon leur nature (poste de travail, imprimante, serveur, etc.).
+\item \textbf{Classe Marque} Représente le fabricant de l'équipement.
+\item \textbf{Classe Modèle} Décrit un modèle précis d'équipement, associé à une marque et à un type d'équipement. Cette classe permet de factoriser les caractéristiques communes à plusieurs équipements similaires.
+\end{itemize}
+
+\subsubsection{Domaine “Cycle de vie et affectations”}
+
+Ce domaine couvre les informations relatives à l'utilisation des équipements par les utilisateurs.\par
+
+\begin{itemize}
+\item \textbf{Classe Affectation} Représente l'affectation d'un équipement à un utilisateur ou à un service pour une période donnée. Elle permet d'assurer la traçabilité des mouvements du matériel au sein de l'entreprise.
+\end{itemize}
+
+\subsubsection{Domaine “Incidents et suivi technique”}
+
+Ce domaine regroupe les classes liées à la gestion des dysfonctionnements et des interventions techniques.\par
+
+\begin{itemize}
+\item \textbf{Classe Panne} Représente un incident signalé sur un équipement. Elle permet de suivre l'état des pannes depuis leur déclaration jusqu'à leur clôture.
+\item \textbf{Classe Intervention} Décrit les actions réalisées par le service informatique pour traiter une panne.
+\item \textbf{Classe Maintenance} Représente une opération de maintenance, qu'elle soit préventive ou corrective, planifiée ou réalisée sur un équipement.
+\end{itemize}
+
+\subsubsection{Domaine “Acquisition et traçabilité”}
+
+Ce domaine permet de couvrir la phase d'entrée des équipements dans le parc informatique.\par
+
+\begin{itemize}
+\item \textbf{Classe Fournisseur} Représente un fournisseur de matériel informatique.
+\item \textbf{Classe Bon} \textbf{Acquisition} Permet de tracer les opérations d'acquisition des équipements, en conservant les informations relatives à l'achat.
+\end{itemize}
+
+\subsubsection{Domaine “Consommables et pièces de rechange”}
+
+Ce domaine prend en compte les éléments nécessaires à la maintenance des équipements.\par
+
+\begin{itemize}
+\item \textbf{Classe Article} Représente un consommable ou une pièce de rechange utilisée lors des interventions ou des opérations de maintenance.
+\item \textbf{Classe Nomenclature} \textbf{Equipement} Permet de définir la liste des articles associés à un type ou à un modèle d'équipement, avec les quantités standards nécessaires.
+\end{itemize}
+
+\subsubsection{Domaine “Reporting et historique”}
+
+Ce domaine regroupe les classes permettant l'analyse et le suivi global du parc.\par
+
+\begin{itemize}
+\item \textbf{Classe Rapport} Représente les rapports générés par le système afin de fournir des indicateurs et des synthèses sur l'état du parc informatique.
+\end{itemize}
+
+\subsection{Description des classes et responsabilités}
+
+Cette section présente une description conceptuelle des classes identifiées précédemment. Pour chaque classe, sont précisés : sa signification métier, ses principales responsabilités, ainsi que ses attributs essentiels (données épurées). Cette description vise à garantir une compréhension claire du modèle conceptuel et à assurer la cohérence entre les exigences fonctionnelles, le dictionnaire des données et le futur diagramme de classes global.\par
+
+Classe : Utilisateur\par
+
+Description : Représente toute personne utilisant le système (administrateur, responsable informatique ou employé). Responsabilités : s'authentifier, accéder aux fonctionnalités selon son rôle, être associé à des affectations et à des déclarations. Attributs principaux : Nom, Prénom, Fonction, Statut compte.\par
+
+Classe : Rôle\par
+
+Description : Définit le profil d'accès d'un utilisateur (droits et responsabilités). Responsabilités : structurer et contrôler l'accès aux fonctionnalités selon le profil. Attributs principaux : Libellé.\par
+
+Classe : Équipement\par
+
+Description : Représente un équipement informatique du parc (poste, imprimante, serveur, etc.). Classe pivot du système. Responsabilités : être inventorié, suivi en termes d'état, affecté, concerné par des pannes, maintenu, acquis et éventuellement réformé. Attributs principaux : Code inventaire, Numéro de série, État, Date acquisition, Localisation.\par
+
+Classe : TypeEquipement\par
+
+Description : Catégorise les équipements selon leur nature (poste, imprimante, serveur...). Responsabilités : classifier les équipements pour faciliter la gestion, le tri et les rapports. Attributs principaux : Libellé.\par
+
+Classe : Marque\par
+
+Description : Représente le fabricant de l'équipement. Responsabilités : normaliser l'information “constructeur” pour éviter la redondance. Attributs principaux : Nom.\par
+
+Classe : Modèle\par
+
+Description : Décrit un modèle précis d'équipement associé à une marque et un type. Responsabilités : factoriser les caractéristiques communes à plusieurs équipements identiques. Attributs principaux : Référence, Description.\par
+
+Classe : Affectation\par
+
+Description : Représente l'attribution d'un équipement à un utilisateur pour une période donnée. Responsabilités : tracer les mouvements du matériel et l'historique d'utilisation. Attributs principaux : Date affectation, Date fin, Statut.\par
+
+Classe : Panne\par
+
+Description : Représente un incident déclaré sur un équipement. Responsabilités : enregistrer la déclaration, suivre l'évolution et l'état de la panne, permettre son traitement et sa clôture. Attributs principaux : Date déclaration, Description, Statut.\par
+
+Classe : Intervention\par
+
+Description : Représente une action technique réalisée pour résoudre ou diagnostiquer une panne. Responsabilités : historiser les actions menées, tracer les résultats, soutenir l'analyse des incidents récurrents. Attributs principaux : Date intervention, Action réalisée, Résultat.\par
+
+Classe : Maintenance\par
+
+Description : Représente une opération de maintenance préventive ou corrective sur un équipement. Responsabilités : planifier et tracer les opérations de maintenance, assurer le suivi et l'historique. Attributs principaux : Type maintenance, Date prévue, Description.\par
+
+Classe : Fournisseur\par
+
+Description : Représente un fournisseur de matériel informatique. Responsabilités : centraliser les informations sur les fournisseurs liés aux acquisitions. Attributs principaux : Raison sociale.\par
+
+Classe : BonAcquisition\par
+
+Description : Représente un document d'acquisition permettant de tracer l'achat d'équipements. Responsabilités : conserver les informations d'achat associées à l'entrée d'équipements dans le parc. Attributs principaux : Référence, Date acquisition, Montant.\par
+
+Classe : Article\par
+
+Description : Représente un consommable ou une pièce de rechange utilisée pour la maintenance et les interventions. Responsabilités : identifier les articles consommables/pièces, structurer les besoins de maintenance. Attributs principaux : Libellé, Type article.\par
+
+Classe : NomenclatureEquipement\par
+
+Description : Représente la nomenclature liant un modèle d'équipement à des articles nécessaires, avec quantités standards. Responsabilités : définir les consommables/pièces associés à un modèle, faciliter la planification des besoins. Attributs principaux : Quantité standard.\par
+
+Classe : Rapport\par
+
+Description : Représente un rapport généré par le système (inventaire, pannes, affectations, statistiques). Responsabilités : fournir des synthèses et indicateurs pour le pilotage du parc informatique. Attributs principaux : (dépend du type de rapport – défini au niveau fonctionnel).\par
+
+\subsection{Relations entre les classes (associations et cardinalités)}
+
+Cette section présente les relations existantes entre les différentes classes du futur système, en précisant pour chaque relation : le type de lien, les rôles et les cardinalités. L'objectif est d'assurer une cohérence structurelle entre les entités métier et de préparer la construction du diagramme de classes conceptuel global.\par
+
+\subsubsection{Relations du domaine “Sécurité et gestion des accès”}
+
+\begin{itemize}
+\item \textbf{Utilisateur — Rôle} Un utilisateur est associé à un seul rôle, tandis qu'un rôle peut être associé à plusieurs utilisateurs. \textbf{Cardinalités :}
+\begin{itemize}
+\item Rôle (1) —— ( 0.. *) Utilisateur
+\item Utilisateur (1) —— (1) Rôle
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Parc informatique” (pivot : Équipement)}
+
+\begin{itemize}
+\item \textbf{Équipement — Modèle} Chaque équipement correspond à un seul modèle, tandis qu'un modèle peut concerner plusieurs équipements. \textbf{Cardinalités :}
+\begin{itemize}
+\item Modèle (1) —— ( 0.. *) Équipement
+\item Équipement (1) —— (1) Modèle
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Modèle — Marque} Un modèle appartient à une seule marque, tandis qu'une marque peut proposer plusieurs modèles. \textbf{Cardinalités :}
+\begin{itemize}
+\item Marque (1) —— ( 0.. *) Modèle
+\item Modèle (1) —— (1) Marque
+\end{itemize}
+\item \textbf{Modèle —} \textbf{TypeEquipement} Un modèle correspond à un seul type d'équipement, tandis qu'un type peut regrouper plusieurs modèles. \textbf{Cardinalités :}
+\begin{itemize}
+\item TypeEquipement (1) —— ( 0.. *) Modèle
+\item Modèle (1) —— (1) TypeEquipement
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Cycle de vie et affectations”}
+
+\begin{itemize}
+\item \textbf{Utilisateur — Affectation} Un utilisateur peut avoir plusieurs affectations au cours du temps. \textbf{Cardinalités :}
+\begin{itemize}
+\item Utilisateur (1) —— ( 0.. *) Affectation
+\item Affectation (1) —— (1) Utilisateur
+\end{itemize}
+\item \textbf{Équipement — Affectation} Un équipement peut être affecté plusieurs fois au cours de son cycle de vie (historique), mais une seule affectation peut être active à un instant donné. \textbf{Cardinalités :}
+\begin{itemize}
+\item Équipement (1) —— ( 0.. *) Affectation
+\item Affectation (1) —— (1) Équipement
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Incidents et suivi technique”}
+
+\begin{itemize}
+\item \textbf{Équipement — Panne} Un équipement peut être concerné par plusieurs pannes, tandis qu'une panne concerne un seul équipement. \textbf{Cardinalités :}
+\begin{itemize}
+\item Équipement (1) —— ( 0.. *) Panne
+\item Panne (1) —— (1) Équipement
+\end{itemize}
+\item \textbf{Panne — Intervention} Une panne peut donner lieu à aucune ou plusieurs interventions, tandis qu'une intervention est associée à une seule panne. \textbf{Cardinalités :}
+\begin{itemize}
+\item Panne (1) —— ( 0.. *) Intervention
+\item Intervention (1) —— (1) Panne
+\end{itemize}
+\item \textbf{Équipement — Maintenance} Un équipement peut faire l'objet de plusieurs opérations de maintenance, tandis qu'une maintenance concerne un seul équipement. \textbf{Cardinalités :}
+\begin{itemize}
+\item Équipement (1) —— ( 0.. *) Maintenance
+\item Maintenance (1) —— (1) Équipement
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Intervention — Maintenance} Une intervention peut conduire à déclencher une maintenance (corrective ou préventive planifiée), et une maintenance peut être liée à une intervention initiale ou être indépendante (préventive). \textbf{Cardinalités (conceptuelles) :}
+\begin{itemize}
+\item Intervention ( 0.. 1) —— (0..*) Maintenance
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Acquisition et traçabilité”}
+
+\begin{itemize}
+\item \textbf{Fournisseur —} \textbf{BonAcquisition} Un fournisseur peut fournir plusieurs bons d'acquisition, tandis qu'un bon d'acquisition est associé à un seul fournisseur. \textbf{Cardinalités :}
+\begin{itemize}
+\item Fournisseur (1) —— ( 0.. *) BonAcquisition
+\item BonAcquisition (1) —— (1) Fournisseur
+\end{itemize}
+\item \textbf{BonAcquisition} \textbf{— Équipement} \textit{(traçabilité d'entrée au parc)} Un bon d'acquisition peut concerner un ou plusieurs équipements, tandis qu'un équipement est rattaché à un seul bon d'acquisition (selon l'organisation retenue). \textbf{Cardinalités :}
+\begin{itemize}
+\item BonAcquisition (1) —— ( 1.. *) Équipement
+\item Équipement (1) —— (1) BonAcquisition
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Consommables et pièces de rechange”}
+
+\begin{itemize}
+\item \textbf{Modèle —} \textbf{NomenclatureEquipement} Un modèle possède une ou plusieurs lignes de nomenclature, tandis qu'une ligne de nomenclature appartient à un seul modèle. \textbf{Cardinalités :}
+\begin{itemize}
+\item Modèle (1) —— ( 1.. *) NomenclatureEquipement
+\item NomenclatureEquipement (1) —— (1) Modèle
+\end{itemize}
+\item \textbf{NomenclatureEquipement} \textbf{— Article} Une ligne de nomenclature référence un seul article, tandis qu'un article peut apparaître dans plusieurs nomenclatures. \textbf{Cardinalités :}
+\begin{itemize}
+\item Article (1) —— ( 0.. *) NomenclatureEquipement
+\item NomenclatureEquipement (1) —— (1) Article
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Relations du domaine “Reporting et historique”}
+
+\begin{itemize}
+\item \textbf{Rapport — (données du système)} Les rapports sont générés à partir des données existantes (équipements, affectations, pannes, interventions, maintenances). Cette relation est de nature conceptuelle : le rapport exploite les données sans créer de dépendance structurelle directe au niveau métier.
+\end{itemize}
+
+\subsection{Règles de gestion du futur système}
+
+Cette sous-section a pour objectif de formaliser les \textbf{règles de gestion} qui encadrent le fonctionnement du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. Les règles de gestion traduisent les contraintes métiers, organisationnelles et fonctionnelles auxquelles le système doit se conformer, indépendamment de toute considération technique.\par
+
+Elles constituent un lien essentiel entre les besoins fonctionnels exprimés (cas d'utilisation), le modèle conceptuel (classes et relations) et la future implémentation du système. Les règles présentées ci-dessous sont établies à partir de l'analyse de l'existant, des pratiques internes de l'entreprise et des choix conceptuels retenus dans cette étude.\par
+
+\textbf{Règles relatives aux utilisateurs et aux accès}\par
+
+\begin{itemize}
+\item \textbf{RG1} : Tout utilisateur du système doit être associé à un seul et unique rôle.
+\item \textbf{RG2} : Les droits d'accès aux fonctionnalités du système sont déterminés exclusivement par le rôle de l'utilisateur.
+\item \textbf{RG3} : Un compte utilisateur peut être actif ou inactif ; un compte inactif ne peut accéder au système.
+\item \textbf{RG4} : La suppression définitive d'un utilisateur est évitée afin de préserver l'historique ; la désactivation est privilégiée.
+\end{itemize}
+
+\textbf{Règles relatives aux équipements}\par
+
+\begin{itemize}
+\item \textbf{RG5} : Chaque équipement doit posséder un code d'inventaire unique au sein du système.
+\item \textbf{RG6} : Un équipement est obligatoirement associé à un seul modèle, une seule marque et un seul type d'équipement.
+\item \textbf{RG7} : À tout instant, un équipement possède un seul état parmi une liste de valeurs contrôlées (disponible, affecté, en panne, en maintenance, réformé).
+\item \textbf{RG8} : Un équipement réformé ne peut plus être affecté ni faire l'objet d'une nouvelle intervention.
+\end{itemize}
+
+\textbf{Règles relatives aux affectations}\par
+
+\begin{itemize}
+\item \textbf{RG9} : Un équipement ne peut être affecté qu'à un seul utilisateur à un instant donné.
+\item \textbf{RG10} : Un utilisateur peut disposer de plusieurs équipements simultanément.
+\item \textbf{RG11} : Toute affectation doit être datée afin d'assurer la traçabilité des mouvements du matériel.
+\item \textbf{RG12} : Une affectation active doit être clôturée avant toute nouvelle affectation du même équipement.
+\end{itemize}
+
+\textbf{Règles relatives aux pannes et interventions}\par
+
+\begin{itemize}
+\item \textbf{RG13} : Une panne ne peut être déclarée que sur un équipement existant et affecté.
+\item \textbf{RG14} : Toute panne déclarée est enregistrée avec un statut initial « ouverte ».
+\item \textbf{RG15} : Une panne peut donner lieu à une ou plusieurs interventions.
+\item \textbf{RG16} : Une panne ne peut être clôturée que si au moins une action corrective a été enregistrée ou justifiée.
+\item \textbf{RG17} : Toute intervention doit être associée à une panne existante.
+\end{itemize}
+
+\textbf{Règles relatives à la maintenance}\par
+
+\begin{itemize}
+\item \textbf{RG18} : Une opération de maintenance peut être préventive ou corrective.
+\item \textbf{RG19} : Une maintenance corrective peut être déclenchée à la suite d'une intervention.
+\item \textbf{RG20} : Une maintenance préventive peut être planifiée indépendamment de toute panne.
+\item \textbf{RG21} : Toute opération de maintenance doit être rattachée à un équipement.
+\end{itemize}
+
+\textbf{Règles relatives aux acquisitions et fournisseurs}\par
+
+\begin{itemize}
+\item \textbf{RG22} : Tout équipement entrant dans le parc doit être rattaché à un bon d'acquisition.
+\item \textbf{RG23} : Un bon d'acquisition est obligatoirement associé à un seul fournisseur.
+\item \textbf{RG24} : Un fournisseur peut être associé à plusieurs bons d'acquisition.
+\item \textbf{RG25} : Les informations relatives aux acquisitions doivent être conservées pour assurer la traçabilité comptable et logistique.
+\end{itemize}
+
+\textbf{Règles relatives aux consommables et pièces de rechange}\par
+
+\begin{itemize}
+\item \textbf{RG26} : Un article peut être référencé comme consommable ou comme pièce de rechange.
+\item \textbf{RG27} : Une nomenclature d'équipement définit les articles nécessaires à un modèle donné avec leurs quantités standards.
+\item \textbf{RG28} : Un article peut être associé à plusieurs nomenclatures d'équipements.
+\end{itemize}
+
+\textbf{Règles relatives au} \textbf{reporting}\par
+
+\begin{itemize}
+\item \textbf{RG29} : Les rapports sont générés à partir des données existantes sans modification de celles-ci.
+\item \textbf{RG30} : Les rapports doivent permettre une analyse synthétique de l'état du parc, des pannes, des affectations et des opérations de maintenance.
+\end{itemize}
+
+\subsection{Diagramme de classes conceptuel global}
+
+Cette section présente le \textbf{diagramme de classes conceptuel global} du futur système de gestion du parc informatiqu e de l'entreprise GERMA GLACES. Ce diagramme synthétise l'ensemble du travail réalisé dans les sections précédentes (3.5.2 à 3.5.6) en offrant une \textbf{vue structurelle complète} du système.\par
+
+Le diagramme de classes met en évidence :\par
+
+\begin{itemize}
+\item les principales classes métier identifiées,
+\item leurs attributs essentiels (données épurées),
+\item les relations entre ces classes,
+\item ainsi que les cardinalités associées.
+\end{itemize}
+
+Aussi, Il constitue une base fondamentale pour la phase de conception détaillée et pour l'implémentation du système lors du Chapitre 4.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_009.png}
+\caption{Figure 17: Diagramme de classes conceptuel du futur système}
+\label{fig:16}
+\end{figure}
+
+Figure 17 : Diagramme de classes conceptuel du futur système\par
+
+\textbf{Synthèse}\par
+
+Le diagramme de classes conceptuel global assure la cohérence entre :\par
+
+\begin{itemize}
+\item Les besoins fonctionnels (cas d'utilisation),
+\item Les règles de gestion,
+\item Le dictionnaire des données,
+\item L a structure du futur système.
+\end{itemize}
+
+Il offre une représentation claire, normalisée et évolutive du modèle conceptuel, servant de référence pour les étapes ultérieures d e conception et de réalisation.\par
+
+\subsection{Conclusion de la section}
+
+La modélisation conceptuelle présentée dans cette section a permis de définir de manière claire, structurée et cohérente la structure statique du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. À travers l'identification des données métiers, des classes principales, de leurs responsabilités, de leurs relations et des règles de gestion associées, cette section constitue un socle fondamental pour la conception du système.\par
+
+Le dictionnaire des données établi a permis d'épurer et de normaliser les informations manipulées par le système, en se concentrant exclusivement sur les données à valeur métier. Cette étape garantit une meilleure compréhension des entités du domaine, limite les redondances et prépare efficacement la transition vers une conception orientée base de données. L'identification des classes et leur organisation par domaines fonctionnels ont, quant à elles, permis de mettre en évidence les grands axes du système : gestion des utilisateurs, gestion du parc informatique, cycle de vie des équipements, gestion des incidents et des maintenances, traçabilité des acquisitions, ainsi que le reporting .\par
+
+Le diagramme de classes conceptuel global synthétise l'ensemble de ces éléments en offrant une vue d'ensemble cohérente du système. Il met en évidence le rôle central de la classe Équipement , autour de laquelle s'articulent les principales fonctionnalités du système, tout en assurant la cohérence avec les cas d'utilisation définis précédemment et les règles de gestion formalisées. Cette modélisation garantit que les besoins fonctionnels exprimés trouvent une traduction structurelle claire et exploitable.\par
+
+Ainsi, la section 3.5 permet de valider la cohérence structurelle du futur système avant d'aborder son comportement dynamique. Elle constitue une étape charnière entre l'analyse fonctionnelle et la modélisation des interactions temporelles. La section suivante sera consacrée aux diagrammes de séquence , qui permettront de décrire le déroulement des principaux cas d'utilisation et d'illustrer concrètement les échanges entre les acteurs et le système lors de son fonctionnement.\par
+
+\section{Diagrammes de séquence}
+
+Les diagrammes de séquence permettent de représenter le \textbf{comportement dynamique} du futur système de gestion du parc informatique. Contrairement au diagramme de classes, qui décrit la structure statique du système, le diagramme de séquence met en évidence les \textbf{échanges de messages} entre les acteurs et les différents objets du système au cours de l'exécution d'un cas d'utilisation.\par
+
+Dans le cadre de ce mémoire, les diagrammes de séquence sont utilisés afin de :\par
+
+\begin{itemize}
+\item Illustrer le déroulement temporel des principaux cas d'utilisation ;
+\item Préciser l'enchaînement des actions entre l'utilisateur et le système ;
+\item Vérifier la cohérence entre les cas d'utilisation, le modèle conceptuel et les règles de gestion ;
+\item Préparer la phase de conception détaillée et de développement de l'application.
+\end{itemize}
+
+Chaque diagramme de séquence est présenté avec :\par
+
+\begin{itemize}
+\item Un objectif clair,
+\item Les acteurs et objets impliqués,
+\item Une description du scénario nominal,
+\item U ne représentation UML à l'aide de PlantUML .
+\end{itemize}
+
+\subsection{Diagramme de séquence – CU10 : Déclarer une panne}
+
+\textbf{Objectif du diagramme}\par
+
+Ce diagramme de séquence a pour objectif de décrire le déroulement temporel du cas d'utilisation \textbf{CU10 – Déclarer une panne} . Il illustre les interactions entre l'employé et le futur système lors de la déclaration d'un incident sur un équipement informatique qui lui est affecté.\par
+
+Ce diagramme permet de montrer comment :\par
+
+\begin{itemize}
+\item L'employé initie la déclaration de panne ;
+\item Le système vérifie les préconditions (authentification et matériel affecté) ;
+\item Les informations relatives à la panne sont saisies et validées ;
+\item La panne est enregistrée avec un statut initial « ouverte » ;
+\item La traçabilité de l'incident est assurée dès sa création.
+\end{itemize}
+
+Il constitue une base essentielle pour garantir la cohérence entre la modélisation fonctionnelle (cas d'utilisation CU10), les règles de gestion associées et le futur comportement du système lors de l'implémentation.\par
+
+Le diagramme ci-dessous illustre le déroulement temporel du cas d'utilisation CU10 – Déclarer une panne , depuis l'initiative de l'employé jusqu'à l'enregistrement effectif de la panne dans le système, conformément aux règles de ges tion définies en section 3.5.6.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_024.png}
+\caption{Figure 18: Diagramme de séquence – Déclarer une panne}
+\label{fig:17}
+\end{figure}
+
+\textbf{3.6.2 Diagramme de séquence – CU7 : Traiter une panne}\par
+
+\textbf{Objectif du diagramme}\par
+
+Ce diagramme de séquence a pour objectif de décrire le déroulement temporel du cas d'utilisation \textbf{CU7 – Traiter une panne} . Il illustre les interactions entre le responsable informatique et le futur système lors de la prise en charge d'une panne déclarée, depuis la consultation des pannes ouvertes jusqu'à la mise à jour de leur statut.\par
+
+Ce diagramme permet de montrer comment :\par
+
+\begin{itemize}
+\item le responsable informatique accède à la liste des pannes ouvertes ;
+\item le système fournit les informations détaillées sur la panne et l'équipement concerné ;
+\item le diagnostic et les actions correctives sont saisis ;
+\item la panne est mise à jour (en cours / clôturée) ;
+\item l'historique des interventions est assuré.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_020.png}
+\caption{Figure 19 : Diagramme de séquence – Traiter une pannne}
+\label{fig:18}
+\end{figure}
+
+\subsection{Diagramme de séquence – CU11 : Proposer à la réforme}
+
+\textbf{Objectif du diagramme}\par
+
+Ce diagramme de séquence a pour objectif de décrire le déroulement temporel du cas d'utilisation \textbf{CU11 – Proposer à la réforme} . Il illustre les interactions entre le responsable informatique et le futur système lorsqu'un équipement est jugé obsolète, irréparable ou économiquement non rentable à maintenir.\par
+
+Ce diagramme permet de montrer comment :\par
+
+\begin{itemize}
+\item le responsable informatique identifie un équipement candidat à la réforme ;
+\item le système vérifie l'état de l'équipement et son historique (pannes, interventions, maintenances) ;
+\item une proposition de réforme est formulée et enregistrée ;
+\item l'état de l'équipement est mis à jour en conséquence ;
+\item la traçabilité de la décision est assurée pour validation ultérieure (direction, audit interne).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_012.png}
+\caption{Figure 20: Diagramme de séquence – Proposer à la réforme}
+\label{fig:19}
+\end{figure}
+
+\section{Diagrammes d'activité}
+
+\subsection{Présentation théorique des diagrammes d'activité}
+
+Le diagramme d'activité UML est un diagramme comportemental dont l'objectif principal est de modéliser le déroulement d'un processus, en mettant en évidence l'enchaînement des actions, les décisions conditionnelles et les chemins alternatifs possibles jusqu'à l'achèvement du processus.\par
+
+Contrairement à une simple description textuelle, le diagramme d'activité offre une représentation graphique structurée des flux de contrôle, permettant de comprendre comment une activité progresse d'un état initial vers un état final, en fonction des règles de gestion et des événements rencontrés.\par
+
+\subsubsection{Rôle du diagramme d'activité dans la modélisation UML}
+
+Dans la démarche UML, le diagramme d'activité est particulièrement utilisé pour :\par
+
+\begin{itemize}
+\item décrire les \textbf{processus métier} complexes,
+\item formaliser les \textbf{enchaînements logiques} entre actions,
+\item représenter les \textbf{points de décision} influençant le déroulement d'un traitement,
+\item améliorer la \textbf{lisibilité fonctionnelle} pour les acteurs non techniques.
+\end{itemize}
+
+Il constitue ainsi un outil privilégié pour passer d'une vision fonctionnelle (cas d'utilisation) à une vision procédurale du système.\par
+
+\subsubsection{Présentation du formalisme des diagrammes d'activité}
+
+Le formalisme UML des diagrammes d'activité repose sur un ensemble d'éléments graphiques normalisés :\par
+
+\begin{itemize}
+\item \textbf{Nœud initial} Représenté par un cercle plein, il indique le \textbf{point de départ} du processus.
+\item \textbf{Action} Représentée par un rectangle aux coins arrondis, une action correspond à une \textbf{étape élémentaire} du processus (ex. : saisir une information, valider une demande).
+\item \textbf{Flux de contrôle} Représenté par une flèche orientée, il indique l' \textbf{ordre d'exécution} des actions.
+\item \textbf{Nœud de décision} Représenté par un losange, il permet de modéliser un \textbf{choix conditionnel} . Chaque sortie est associée à une condition (ex. : \textit{Oui / Non} ).
+\item \textbf{Nœud de fusion} Permet de \textbf{regrouper plusieurs chemins alternatifs} vers un flux unique.
+\item \textbf{Nœud final} Représenté par un cercle entouré, il marque la \textbf{fin du processus} .
+\end{itemize}
+
+Ces éléments permettent de construire un diagramme clair, structuré et conforme aux standards UML, garantissant une interprétation univoque.\par
+
+\subsubsection{Différence et complémentarité avec les autres diagrammes UML}
+
+\begin{itemize}
+\item \textbf{Diagramme de cas d'utilisation} Il décrit \textit{ce que} le système permet de faire, sans détailler le déroulement interne.
+\item \textbf{Diagramme de séquence} Il met l'accent sur les \textbf{interactions entre objets} et l'ordre temporel des messages.
+\item \textbf{Diagramme d'activité} Il se concentre sur le \textbf{flux global du processus} , indépendamment des objets techniques, ce qui le rend particulièrement adapté à la modélisation métier.
+\end{itemize}
+
+Ainsi, le diagramme d'activité ne remplace pas les autres diagrammes, mais les complète, en apportant une vision transversale et dynamique des traitements.\par
+
+\subsubsection{Intérêt académique dans le cadre du projet}
+
+Dans le cadre de ce mémoire, les diagrammes d'activité permettent :\par
+
+\begin{itemize}
+\item de formaliser précisément les \textbf{processus clés} de gestion du parc informatique,
+\item de traduire les \textbf{règles de gestion} en décisions explicites,
+\item de renforcer la cohérence entre l'étude fonctionnelle (chapitre 3) et la réalisation applicative (chapitre 4).
+\end{itemize}
+
+Ils constituent donc un \textbf{maillon essentiel de l'étude conceptuelle} , facilitant la compréhension du système avant toute implémentation technique.\par
+
+\subsection{Lien des diagrammes d'activité avec l'étude conceptuelle}
+
+Les diagrammes d'activité présentés dans ce chapitre s'inscrivent directement dans la continuité de l'étude conceptuelle UML menée précédemment. Ils constituent un niveau d'abstraction intermédiaire entre la description fonctionnelle du système et sa mise en œuvre technique.\par
+
+\subsubsection{Articulation avec les cas d'utilisation}
+
+Les diagrammes d'activité sont élaborés à partir des cas d'utilisation identifiés dans l'étude fonctionnelle. Chaque diagramme d'activité correspond à un scénario principal ou à un processus métier clé issu d'un ou plusieurs cas d'utilisation, notamment :\par
+
+\begin{itemize}
+\item la déclaration d'une panne,
+\item le traitement d'une panne,
+\item l'affectation d'un équipement,
+\item la gestion d'une demande de réforme.
+\end{itemize}
+
+Ainsi, alors que les cas d'utilisation décrivent les services offerts par le système et les interactions entre acteurs et système, les diagrammes d'activité détaillent le déroulement interne de ces services, en mettant en évidence les étapes successi ves et les décisions associées.\par
+
+\subsubsection{Prise en compte des acteurs du système}
+
+Les diagrammes d'activité permettent également de clarifier le rôle des acteurs identifiés dans l'étude conceptuelle, à savoir :\par
+
+\begin{itemize}
+\item L'Employé ,
+\item Le Responsable IT,
+\item L'Administrateur .
+\end{itemize}
+
+Chaque activité est associée à un acteur précis, ce qui assure :\par
+
+\begin{itemize}
+\item Une \textbf{cohérence avec les rôles définis} dans les cas d'utilisation,
+\item Une meilleure compréhension des responsabilités de chacun au sein des processus métier.
+\end{itemize}
+
+\subsubsection{Intégration des règles de gestion}
+
+Les règles de gestion, définies lors de l'analyse de l'existant et formalisées dans l'étude conceptuelle, sont directement intégrées dans les diagrammes d'activité sous forme :\par
+
+\begin{itemize}
+\item De \textbf{conditions de décision} (ex. : informations complètes ou non),
+\item De \textbf{choix alternatifs} (ex. : priorisation des pannes),
+\item De \textbf{chemins conditionnels} dépendant de l'état du processus.
+\end{itemize}
+
+Cette intégration permet de rendre explicite la logique métier et d'éviter toute ambiguïté lors de la transition vers la phase de réalisation.\par
+
+\subsubsection{Complémentarité avec les autres diagrammes UML}
+
+Dans l'étude conceptuelle globale :\par
+
+\begin{itemize}
+\item Les \textbf{diagrammes de classes} définissent la structure des données,
+\item Les \textbf{diagrammes de séquence} décrivent les échanges entre objets,
+\item Les \textbf{diagrammes d'activité} offrent une vision \textbf{globale et procédurale} des traitements.
+\end{itemize}
+
+Ils jouent donc un rôle de liaison entre les différents niveaux de modélisation, en assurant la cohérence entre :\par
+
+\begin{itemize}
+\item La vision fonctionnelle,
+\item La vision dynamique,
+\item L a vision structurelle du système.
+\end{itemize}
+
+\textbf{Apport pour la suite du projet}\par
+
+En établissant ce lien explicite avec l'étude conceptuelle, les diagrammes d'activité :\par
+
+\begin{itemize}
+\item Facilitent la compréhension du système avant l'implémentation,
+\item Servent de \textbf{référence} pour la conception technique,
+\item Contribuent à la traçabilité entre besoins, modèles et réalisation.
+\end{itemize}
+
+Ils constituent ainsi un support méthodologique essentiel, garantissant une transition maîtrisée vers la phase de conception et de développement.\par
+
+\subsection{Diagramme d'activité — Déclarer une panne}
+
+\subsubsection{Objectif du processus}
+
+Ce diagramme d'activité a pour objectif de modéliser le processus de déclaration d'une panne au sein du système de gestion du parc informatique. Il décrit les différentes étapes permettant à un Employé de signaler un dysfonctionnement affectant un équipement, depuis l'accès au module dédié jusqu'à l'enregistrement de la panne dans le système.\par
+
+L'objectif principal est de garantir que toute panne déclarée soit complète, structurée et exploitable, afin de faciliter sa prise en charge ultérieure par le Responsable IT.\par
+
+\subsubsection{Acteur principal}
+
+\begin{itemize}
+\item \textbf{Employé}
+\end{itemize}
+
+L'employé est à l'origine de la déclaration de panne. Il fournit les informations nécessaires à l'identification du problème et déclenche ainsi le processus de traitement.\par
+
+\subsubsection{Périmètre fonctionnel}
+
+Le périmètre de ce processus couvre :\par
+
+\begin{itemize}
+\item L'accès au module de gestion des pannes,
+\item La sélection de l'équipement concerné,
+\item La saisie des informations descriptives de la panne,
+\item La définition du \textbf{niveau de priorité} ,
+\item La validation et l'enregistrement de la panne.
+\end{itemize}
+
+À l'issue de ce processus, une panne est créée avec le statut initial OUVERTE.\par
+
+\subsubsection{Règles de gestion mobilisées}
+
+\begin{itemize}
+\item Une panne nouvellement déclarée est automatiquement enregistrée à l'état \textbf{OUVERTE} .
+\item La \textbf{priorité} de la panne (basse, moyenne ou haute) est définie lors de la déclaration.
+\item Les informations obligatoires doivent être renseignées avant validation.
+\item Toute déclaration incomplète entraîne un rejet temporaire et une demande de correction.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_027.png}
+\caption{Figure 21: Diagramme d'activité — Déclarer une panne}
+\label{fig:20}
+\end{figure}
+
+Figure 21 : Diagramme d'activité — Déclarer une panne\par
+
+\subsubsection{Synthèse explicative}
+
+Ce diagramme d'activité illustre de manière claire le flux de déclaration d'une panne du point de vue de l'Employé. Il met en évidence les contrôles de complétude, la prise en compte de la priorité et la création systématique d'une panne à l'état OUVERTE.\par
+
+Il constitue le point d'entrée du cycle de gestion des pannes, préparant la phase suivante représentée par le diagramme d'activité « Traiter une panne », prise en charge par le Responsable IT.\par
+
+\subsection{Diagramme d'activité — Traiter une panne (avec priorisation)}
+
+\subsubsection{Objectif du processus}
+
+Ce diagramme d'activité modélise le processus de traitement d'une panne par le Responsable IT. Il décrit les étapes allant de la consultation des pannes déclarées jusqu'à leur prise en charge, leur résolution et leur clôture.\par
+
+La spécificité de ce processus réside dans l'intégration de la priorisation, permettant d'organiser la prise en charge des pannes en fonction de leur criticité (basse, moyenne, haute) afin d'optimiser les interventions et de garantir une meilleure continuité de service.\par
+
+\subsubsection{Acteur principal}
+
+\begin{itemize}
+\item \textbf{Responsable IT}
+\end{itemize}
+
+Le Responsable IT assure la gestion opérationnelle des incidents : il analyse les pannes ouvertes, fixe l'ordre de traitement selon la priorité, puis effectue le traitement jusqu'à la résolution ou, si applicable, l'annulation (uniquement si la panne est encore à l'état OUVERTE).\par
+
+\subsubsection{Périmètre fonctionnel}
+
+Le périmètre de ce processus couvre :\par
+
+\begin{itemize}
+\item la consultation de la liste des pannes,
+\item l'organisation de la file de traitement selon la priorité,
+\item la sélection d'une panne à traiter,
+\item la prise en charge et le passage en état EN\_COURS ,
+\item l'exécution des actions de diagnostic et de résolution,
+\item la clôture en état CLOTUREE ,
+\item l'annulation éventuelle \textbf{uniquement depuis l'état} \textbf{OUVERTE} .
+\end{itemize}
+
+\subsubsection{Règles de gestion mobilisées}
+
+\begin{itemize}
+\item Une panne à traiter est sélectionnée en tenant compte de sa priorité.
+\item Une panne passe de OUVERTE à EN\_COURS lors de la prise en charge par le Responsable IT.
+\item Une panne passe de EN \_COURS à CLOTUREE lors de la résolution.
+\item L'annulation d'une panne est autorisée uniquement si elle est encore à l'état OUVERTE .
+\item Une panne clôturée ( CLOTUREE ) ne peut pas être réouverte.
+\end{itemize}
+
+\subsubsection{Synthèse explicative}
+
+Ce diagramme formalise la gestion opérationnelle des pannes par le Responsable IT en introduisant explicitement la priorisation comme critère d'ordonnancement des interventions. Il met en évidence :\par
+
+\begin{itemize}
+\item le passage contrôlé des états ( OUVERTE → EN\_COURS → CLOTUREE ),
+\item la possibilité d'annulation \textbf{strictement limitée} à l'état OUVERTE ,
+\item l'absence de réouverture après clôture,
+\item la mise à jour continue des informations de suivi lorsque la résolution n'est pas immédiate.
+\end{itemize}
+
+Ce processus constitue le cœur du traitement des incidents dans l'application et assure la traçabilité complète des actions IT.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_005.png}
+\caption{Figure 22: Diagramme d'activité : Traiter une panne (avec priorisation)}
+\label{fig:21}
+\end{figure}
+
+Figure 22 : Diagramme d'activité : Traiter une panne (avec priorisation)\par
+
+\subsection{Diagramme d'activité — Affecter un équipement}
+
+\subsubsection{Objectif du processus}
+
+Ce diagramme d'activité modélise le processus d'affectation d'un équipement à un utilisateur. Il décrit les étapes permettant au Responsable IT d'attribuer un matériel à un employé, tout en garantissant la traçabilité et l'unicité de l'affectation active.\par
+
+La spécificité du processus réside dans la règle suivante :\par
+
+toute nouvelle affectation déclenche la clôture automatique de l'affectation précédente (si elle existe), afin d'éviter les doublons et de maintenir un historique cohérent.\par
+
+\subsubsection{Acteur principal}
+
+\begin{itemize}
+\item \textbf{Responsable IT}
+\end{itemize}
+
+\subsubsection{Périmètre fonctionnel}
+
+Le périmètre couvre :\par
+
+\begin{itemize}
+\item l'accès au module de gestion des affectations,
+\item la sélection de l'équipement et de l'utilisateur,
+\item la vérification de l'état et de la disponibilité de l'équipement,
+\item la clôture automatique de l'affectation précédente,
+\item la création de la nouvelle affectation (active),
+\item l'enregistrement et la confirmation.
+\end{itemize}
+
+\textbf{Règles de gestion mobilisées}\par
+
+\begin{itemize}
+\item Un équipement ne doit avoir \textbf{qu'une seule affectation active} à un instant donné.
+\item Lors d'une nouvelle affectation, l'affectation précédente est \textbf{clôturée automatiquement} (si elle existe).
+\item L'affectation \textbf{ne peut pas être refusée} (décision actée) : le processus est soit validé, soit renvoie à correction (ex. informations incompl ètes / équipement indisponible).
+\item L'affectation s'effectue sur un équipement \textbf{disponible et opérationnel} (selon l'état de l'équipement).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_025.png}
+\caption{Figure 23 : Diagramme d'activité Affecter un équipement (clôture automatique)}
+\label{fig:22}
+\end{figure}
+
+Figure 23 : Diagramme d'activité Affecter un équipement (clôture automatique)\par
+
+\subsubsection{Synthèse explicative}
+
+Ce diagramme met en évidence la logique métier central : garantir l'unicité d'affectation active pour un équipement. L'automatisation de la clôture de l'a ffectation précédente renforce\par
+
+\begin{itemize}
+\item la \textbf{traçabilité} (historique des affectations),
+\item la \textbf{cohérence des données} (pas de conflits),
+\item la \textbf{fiabilité des consultations} (statut d'affectation univoque).
+\end{itemize}
+
+Il constitue un processus structurant, directement lié à la gestion opérationnelle du parc.\par
+
+\subsection{Diagramme d'activité — Traiter une demande de réforme}
+
+\subsubsection{Objectif du processus}
+
+Ce diagramme d'activité modélise le processus de traitement d'une demande de réforme d'un équipement. Il décrit la séquence d'actions depuis la proposition initiée par le Responsable IT jusqu'à la décision finale prise par l'Administrateur.\par
+
+Le processus vise à :\par
+
+\begin{itemize}
+\item assurer une \textbf{validation administrative} formelle,
+\item garantir la \textbf{traçabilité} des décisions,
+\item appliquer la règle selon laquelle une \textbf{réforme validée entraîne automatiquement la fin de l'affectation} de l'équipement (si une affectation active existe),
+\item permettre , en cas de rejet, un \textbf{retour arrière sous forme de nouvelle demande} (et non une réouverture de la demande rejetée).
+\end{itemize}
+
+\subsubsection{Acteurs}
+
+\begin{itemize}
+\item \textbf{Responsable IT} : propose la réforme et soumet la demande.
+\item \textbf{Administrateur} : décide (validation ou rejet), exclusivement.
+\end{itemize}
+
+\subsubsection{Périmètre fonctionnel}
+
+Le périmètre couvre :\par
+
+\begin{itemize}
+\item la création/soumission de la demande de réforme par le Responsable IT,
+\item la consultation et l'analyse de la demande par l'Administrateur,
+\item la décision administrative (validation / rejet),
+\item l'exécution des actions automatiques associées à la validation :
+\begin{itemize}
+\item passage de l'équipement à l'état REFORME ,
+\item clôture automatique de l'affectation active (si présente),
+\end{itemize}
+\item la clôture du processus en cas de rejet, avec possibilité de soumettre \textbf{une nouvelle demande} .
+\end{itemize}
+
+\subsubsection{Règles de gestion mobilisées}
+
+\begin{itemize}
+\item La décision de réforme est \textbf{uniquement administrative} (Administrateur).
+\item Une demande de réforme rejetée est \textbf{terminale} : on ne la rouvre pas ; le retour arrière se fait par \textbf{création d'une nouvelle demande} .
+\item Une réforme \textbf{validée} entraîne :
+\begin{itemize}
+\item la mise à jour de l'état de l'équipement à REFORME ,
+\item la \textbf{fin automatique de l'affectation} active (si elle existe).
+\end{itemize}
+\item Toute décision est enregistrée (date, commentaire, responsable).
+\end{itemize}
+
+Figure 24 : Diagramme d'activité : Traiter une demande de réforme\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_018.png}
+\caption{Figure 23}
+\label{fig:23}
+\end{figure}
+
+Ce diagramme met en évidence la séparation des responsabilités :\par
+
+\begin{itemize}
+\item le \textbf{Responsable IT} initie et justifie la demande,
+\item l' \textbf{Administrateur} est l'unique décideur.
+\end{itemize}
+
+Il formalise également deux points structurants :\par
+
+\begin{itemize}
+\item \textbf{Rejet terminal} : une demande rejetée n'est pas réouverte ; le retour arrière se fait par \textbf{nouvelle demande} .
+\item \textbf{Réforme validée = fin d'affectation} : la validation déclenche automatiquement la clôture de toute affectation active, garantissant la cohérence historique et la traçabilité du cycle de vie de l'équipement.
+\end{itemize}
+
+\section{Diagrammes d'état-transitions}
+
+\subsubsection{Présentation théorique des diagrammes d'état-transitions}
+
+Le diagramme d'état-transition UML (state machine diagram ) est un diagramme comportemental qui modélise le cycle de vie d'une entité au travers :\par
+
+\begin{itemize}
+\item d'un ensemble d'états (situations stables dans lesquelles l'entité peut se trouver),
+\item de transitions (changements d'état),
+\item déclenchées par des événements ou conditions,
+\item parfois associées à des actions (effets) et à des gardes (conditions).
+\end{itemize}
+
+Ce diagramme est particulièrement adapté lorsqu'une entité :\par
+
+\begin{itemize}
+\item possède un attribut de statut ,
+\item évolue selon des règles strictes,
+\item et doit respecter des transitions autorisées (et interdire les autres).
+\end{itemize}
+
+\subsubsection{Formalisme (éléments principaux)}
+
+\begin{itemize}
+\item État initial : point de départ du cycle de vie.
+\item États : représentés par des rectangles aux coins arrondis.
+\item Transitions : flèches orientées entre états, étiquetées par l'événement (et éventuellement une condition).
+\item État final : fin du cycle de vie (si l'entité est considérée comme terminée).
+\item États terminaux : états dont on ne sort pas (selon les règles métier).
+\end{itemize}
+
+\subsubsection{Différence avec les diagrammes d'activité}
+
+\begin{itemize}
+\item Activité : décrit le déroulement d'un processus (workflow).
+\item État-transition : décrit l'évolution d'une entité dans le temps (cycle de vie).
+\end{itemize}
+
+Dans un système de gestion, ce diagramme sert à garantir la cohérence temporelle : une entité ne peut pas “sauter” un état ou revenir en arrière si cela n'est pas autorisé.\par
+
+\subsection{Lien des diagrammes d'état-transitions avec l'étude conceptuelle}
+
+Les diagrammes d'état-transitions présentés dans cette section s'inscrivent directement dans la continuité de l'étude conceptuelle UML du système de gestion du parc informatique. Ils viennent compléter les diagrammes déjà élaborés en apportant une vision temporelle et évolutive des entités centrales du système.\par
+
+\subsubsection{Articulation avec le diagramme de classes}
+
+Le lien principal entre les diagrammes d'état-transitions et l'étude conceptuelle s'établit avec le diagramme de classes. Les entités modélisées sous forme de machines à états (panne, équipement, demande de réforme) correspondent à des classes métier identifiées précédemment et disposant d'un attribut de statut.\par
+
+Chaque état représente une situation stable de l'instance de la classe, tandis que les transitions traduisent les changements d'état autorisés par les règles de gestion. Cette modélisation permet ainsi de :\par
+
+\begin{itemize}
+\item renforcer la cohérence du modèle de classes,
+\item expliciter le comportement dynamique associé aux entités,
+\item éviter les états incohérents ou non prévus.
+\end{itemize}
+
+\subsubsection{Intégration des règles de gestion}
+
+Les diagrammes d'état-transitions constituent une formalisation graphique des règles de gestion temporelles. Ils traduisent notamment :\par
+
+\begin{itemize}
+\item les états initiaux et terminaux,
+\item les transitions autorisées et interdites,
+\item l'absence de retour arrière lorsque cela est imposé par les règles métier.
+\end{itemize}
+
+Dans le cadre de ce projet, ils permettent par exemple de matérialiser :\par
+
+\begin{itemize}
+\item l'impossibilité de réouvrir une panne clôturée,
+\item le caractère terminal d'une demande de réforme rejetée,
+\item la progression contrôlée du cycle de vie d'un équipement.
+\end{itemize}
+
+\subsubsection{Complémentarité avec les diagrammes d'activité}
+
+Alors que les diagrammes d'activité décrivent le déroulement des processus impliquant plusieurs acteurs, les diagrammes d'état-transitions se concentrent sur le comportement interne d'une entité, indépendamment des acteurs.\par
+
+Les deux types de diagrammes sont donc complémentaires :\par
+
+\begin{itemize}
+\item l'activité montre \textit{comment} une action est réalisée,
+\item l'état -transition montre \textit{comment l'état de l'entité évolue} suite à cette action.
+\end{itemize}
+
+Cette complémentarité renforce la cohérence globale de l'étude conceptuelle et assure une meilleure traçabilité entre processus et états.\par
+
+\subsubsection{Apport pour la conception et la réalisation}
+
+En établissant ce lien avec l'étude conceptuelle, les diagrammes d'état-transitions :\par
+
+\begin{itemize}
+\item servent de \textbf{référence} pour la validation des traitements,
+\item facilitent la conception des contrôles de cohérence dans l'application,
+\item contribuent à la fiabilité du système en encadrant strictement les évolutions d'état.
+\end{itemize}
+
+Ils constituent ainsi un outil conceptuel essentiel, garantissant que la réalisation respecte les cycles de vie définis au niveau du modèle.\par
+
+\subsection{Diagramme d'état-transition — Panne}
+
+\subsubsection{Entité concernée}
+
+\begin{itemize}
+\item \textbf{Panne}
+\end{itemize}
+
+Cette entité représente un incident déclaré sur un équipement du parc informatique. Elle possède un \textbf{cycle de vie clairement défini} , encadré par des règles de gestion strictes afin d'assurer la traçabilité et la cohérence du traitement des incidents.\par
+
+\subsubsection{États du cycle de vie}
+
+La panne évolue selon les états suivants :\par
+
+\begin{itemize}
+\item \textbf{OUVERTE} État initial de toute panne nouvellement déclarée. La panne est enregistrée dans le système et en attente de prise en charge.
+\item \textbf{EN\_COURS} La panne a été prise en charge par le Responsable IT et fait l'objet d'un diagnostic et d'actions correctives.
+\item \textbf{CLOTUREE} La panne a été résolue. Cet état est \textbf{terminal} : aucune réouverture n'est autorisée.
+\end{itemize}
+
+\subsubsection{Transitions autorisées}
+
+Les transitions entre états sont définies comme suit :\par
+
+\begin{itemize}
+\item \textbf{OUVERTE → EN\_COURS} Déclenchée lors de la \textbf{prise en charge} de la panne par le Responsable IT.
+\item \textbf{EN\_COURS → CLOTUREE} Déclenchée lors de la \textbf{résolution} effective de la panne.
+\item \textbf{OUVERTE → CLOTUREE (annulation)} Déclenchée lorsque la panne est jugée non pertinente ou déclarée par erreur. Cette transition est \textbf{autorisée uniquement depuis l'état} \textbf{OUVERTE} .
+\end{itemize}
+
+Aucune transition inverse n'est autorisée à partir de l'état CLOTUREE .\par
+
+\subsubsection{Contraintes et règles associées}
+
+\begin{itemize}
+\item Une panne \textbf{ne peut pas être réouverte} après clôture.
+\item Toute transition doit être \textbf{justifiée et tracée} (date, acteur, commentaire).
+\item Les transitions reflètent strictement les règles de gestion définies lors de l'étude conceptuelle.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_013.png}
+\caption{Figure 25 : Diagramme d'état-transition — Panne}
+\label{fig:24}
+\end{figure}
+
+Figure 25 : Diagramme d'état-transition — Panne\par
+
+\subsubsection{Synthèse explicative}
+
+Ce diagramme d'état-transition formalise le \textbf{cycle de vie complet d'une panne} , depuis sa création jusqu'à sa clôture définitive. Il met en évidence :\par
+
+\begin{itemize}
+\item La simplicité et la clarté du cycle,
+\item La distinction entre \textbf{annulation} et \textbf{résolution} ,
+\item Le caractère \textbf{terminal} de l'état CLOTUREE .
+\end{itemize}
+
+Il garantit que toute panne suit un chemin cohérent et contrôlé, conforme aux règles de gestion du système et aux processus décrits dans les diagrammes d'activité.\par
+
+\subsection{Diagramme d'état-transition — Équipement}
+
+\subsubsection{Entité concernée}
+
+\begin{itemize}
+\item \textbf{Équipement}
+\end{itemize}
+
+L'équipement représente un actif du parc informatique (PC, imprimante, switch, etc.). Il évolue selon un cycle de vie qui reflète son état opérationnel au cours du temps, depuis son acquisition jusqu'à sa réforme.\par
+
+\subsubsection{États du cycle de vie}
+
+L'équipement évolue selon les états suivants :\par
+
+\begin{itemize}
+\item \textbf{NON\_AFFECTE} État initial après l'achat / acquisition. L'équipement n'est pas encore mis en service et n'est affecté à aucun utilisateur.
+\item \textbf{OPERATIONNEL} L'équipement est mis en service (inventaire/validation initiale réalisée) et peut être utilisé dans le cadre normal de l'activité.
+\item \textbf{EN\_PANNE} L'équipement est déclaré en panne (dysfonctionnement signalé) et n'est pas considéré comme utilisable tant que le problème n'est pas pris en charge.
+\item \textbf{EN\_MAINTENANCE} L'équipement est en cours de réparation, de diagnostic avancé ou de maintenance technique.
+\item \textbf{REFORME} L'équipement est réformé, c'est-à-dire retiré définitivement du parc actif. Cet état est terminal.
+\end{itemize}
+
+\subsubsection{Transitions autorisées}
+
+Les transitions entre états sont définies comme suit :\par
+
+\begin{itemize}
+\item \textbf{NON\_AFFECTE → OPERATIONNEL} Déclenchée au moment de l' \textbf{inventaire / validation initiale} (mise en service).
+\item \textbf{OPERATIONNEL → EN\_PANNE} Déclenchée lorsqu'une panne est signalée sur l'équipement.
+\item \textbf{EN\_PANNE → EN\_MAINTENANCE} Déclenchée lors de l'envoi en maintenance (prise en charge technique).
+\item \textbf{EN\_MAINTENANCE → OPERATIONNEL} Déclenchée lorsque l'équipement est réparé et remis en service.
+\item \textbf{OPERATIONNEL → REFORME} Déclenchée suite à une décision de réforme validée.
+\item \textbf{EN\_PANNE → REFORME} Déclenchée si l'équipement est déclaré non réparable ou économiquement non pertinent à réparer.
+\item \textbf{EN\_MAINTENANCE → REFORME} Déclenchée si la maintenance conclut à une non-réparabilité.
+\end{itemize}
+
+\subsubsection{Contraintes importantes :}
+
+\begin{itemize}
+\item Le retour \textbf{EN\_PANNE → OPERATIONNEL sans maintenance} est \textbf{interdit} .
+\end{itemize}
+
+\subsubsection{Contraintes et règles associées}
+
+\begin{itemize}
+\item L'état REFORME est \textbf{terminal} : aucune transition sortante n'est autorisée.
+\item Toute transition doit être justifiée et tracée (date, motif, acteur).
+\item Le passage en OPERATIONNEL depuis NON\_AFFECTE correspond explicitement à la \textbf{mise en service} (inventaire/validation).
+\item Le retour en service après panne impose le passage par EN\_MAINTENANCE .
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_028.png}
+\caption{Figure 26 : Diagramme d'état-transition : Équipement}
+\label{fig:25}
+\end{figure}
+
+Figure 26 : Diagramme d'état-transition : Équipement\par
+
+\subsubsection{Synthèse explicative}
+
+Ce diagramme formalise le \textbf{cycle de vie complet d'un équipement} , depuis son acquisition ( NON\_AFFECTE ) jusqu'à sa sortie du parc ( REFORME ). Il met en évidence :\par
+
+\begin{itemize}
+\item la mise en service initiale via l'inventaire/validation,
+\item la gestion stricte de la panne via un passage obligatoire par la maintenance,
+\item la possibilité de réforme depuis plusieurs états selon la décision ou le diagnostic.
+\end{itemize}
+
+Cette modélisation garantit la cohérence temporelle et fonctionnelle du suivi des équipements dans le système.\par
+
+\subsection{Diagramme d'état-transition — Demande de réforme}
+
+\subsubsection{Entité concernée}
+
+\begin{itemize}
+\item \textbf{Demande de réforme}
+\end{itemize}
+
+La demande de réforme représente une requête formelle visant à retirer un équipement du parc actif. Elle suit un cycle de vie simple, centré sur la \textbf{décision administrative} , garantissant la traçabilité des validations et des rejets.\par
+
+\subsubsection{États du cycle de vie}
+
+La demande de réforme évolue selon les états suivants :\par
+
+\begin{itemize}
+\item \textbf{EN\_ATTENTE} État initial : la demande est soumise et attend une décision de l'Administrateur.
+\item \textbf{VALIDEE} La demande est acceptée par l'Administrateur. Cet état est terminal.
+\item \textbf{REJETEE} La demande est refusée par l'Administrateur. Cet état est terminal.
+\end{itemize}
+
+\subsubsection{Transitions autorisées}
+
+Les transitions entre états sont définies comme suit :\par
+
+\begin{itemize}
+\item \textbf{EN\_ATTENTE → VALIDEE} Déclenchée par la \textbf{validation} de la demande par l'Administrateur.
+\item \textbf{EN\_ATTENTE → REJETEE} Déclenchée par le \textbf{rejet} de la demande par l'Administrateur.
+\end{itemize}
+
+\subsubsection{Contraintes importantes :}
+
+\begin{itemize}
+\item La décision est \textbf{uniquement administrative} (Administrateur).
+\item Les états VALIDEE et REJETEE sont \textbf{terminaux} : aucune transition sortante n'est autorisée.
+\item En cas de rejet, le “retour arrière” se fait par \textbf{création d'une nouvelle demande} , et non par réouverture d'une demande rejetée (ce point est modélisé au niveau activité, pas au niveau état-transition).
+\end{itemize}
+
+\subsubsection{Contraintes et règles associées}
+
+\begin{itemize}
+\item Chaque décision (validation / rejet) doit être tracée (date, commentaire, décideur).
+\item Une demande arrivée à un état terminal ne peut pas changer d'état.
+\item Une réforme validée déclenchera, au niveau processus, la mise à jour de l'équipement à l'état REFORME et la fin de toute affectation active (règles traitées dans le diagramme d'activité associé).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_003.png}
+\caption{Figure 27 : Diagramme d'état-transition : Demande de réforme}
+\label{fig:26}
+\end{figure}
+
+Figure 27 : Diagramme d'état-transition : Demande de réforme\par
+
+\textbf{Synthèse explicative}\par
+
+Ce diagramme d'état-transition met en évidence un cycle de vie volontairement \textbf{court et strict} , centré sur une décision administrative unique. Il garantit :\par
+
+\begin{itemize}
+\item la traçabilité de la prise de décision,
+\item le caractère irréversible des états terminaux,
+\item la cohérence conceptuelle avec les processus métier (où le rejet entraîne éventuellement une nouvelle demande).
+\end{itemize}
+
+\section{Conclusion du chapitre 3}
+
+Ce chapitre a été consacré à l'étude conceptuelle UML du futur système de gestion du parc informatique de l'entreprise GERMA GLACES. Il constitue une étape déterminante dans le déroulement du projet, en assurant la transition entre l'analyse de l'existant et la phase de conception technique et de réalisation. L'objectif principal de ce chapitre était de proposer une modélisation claire, cohérente et structurée du système à concevoir, indépendamment de toute considération technologique.\par
+
+Dans un premier temps, l'étude conceptuelle a permis de formaliser les besoins fonctionnels du futur système à travers l'identification des acteurs et l'élaboration des diagrammes de cas d'utilisation. Ces diagrammes ont offert une vision globale des interactions entre les utilisateurs et le système, tout en mettant en évidence les responsabilités respectives de l'administrateur du système, du responsable informatique et de l'employé. Les cas d'utilisation définis couvrent l'ensemble des fonctionnalités essentielles liées à la gestion du parc informatique, depuis l'administration des utilisateurs et des équipements jusqu'au suivi des pannes, des maintenances et des opérations de réforme.\par
+
+Dans un second temps, le diagramme de classes conceptuel a permis de structurer les données métiers du futur système. L'identification des classes principales, leur organisation par domaines fonctionnels, ainsi que la définition de leurs attributs, responsabilités et relations, ont permis de construire un modèle conceptuel robuste et cohérent. La classe \textbf{Équipement} a été identifiée comme l'élément central du système, autour duquel s'articulent les processus d'affectation, de maintenance, de gestion des incidents, d'acquisition et de réforme. Cette structuration reflète fidèlement la réalité métier de l'entreprise et répond aux problématiques mises en évidence lors de l'étude de l'existant.\par
+
+L'introduction d'un dictionnaire des données épurées a renforcé la clarté et la précision du modèle conceptuel. En se limitant aux données à valeur métier et en évitant toute redondance inutile, ce dictionnaire constitue une référence essentielle pour la compréhension des informations manipulées par le système. Il prépare également la transition vers une conception orientée base de données, tout en garantissant la cohérence entre les besoins fonctionnels et la structure des données.\par
+
+Par ailleurs, la formalisation des règles de gestion du futur système a permis d'expliciter les contraintes métiers et organisationnelles qui encadrent le fonctionnement du système. Ces règles jouent un rôle central dans la cohérence globale du modèle, en assurant l'alignement entre les cas d'utilisation, le diagramme de classes et les futurs comportements du système. Elles constituent également un support important pour la phase d'implémentation, en guidant les choix techniques et les mécanismes de contrôle à mettre en œuvre.\par
+
+Enfin, les diagrammes de séquence ont permis de compléter l'étude conceptuelle en apportant une vision dynamique du système. En décrivant le déroulement temporel des principaux cas d'utilisation, notamment la déclaration et le traitement des pannes ainsi que la proposition à la réforme des équipements, ces diagrammes illustrent concrètement les interactions entre les acteurs et le système. Ils permettent de vérifier la cohérence entre les fonctionnalités attendues, les règles de gestion et le modèle conceptuel, tout en préparant la conception détaillée de l'application.\par
+
+Ainsi, ce chapitre a permis de poser des bases solides pour la suite du projet. La modélisation UML réalisée offre une vision complète, structurée et cohérente du futur système de gestion du parc informatique de GERMA GLACES. Elle constitue un socle fiable pour la phase suivante, consacrée à la conception technique et à la réalisation de l'application web, au cours de laquelle les choix technologiques, l'architecture logicielle et l'implémentation concrète du système seront détaillés.\par
