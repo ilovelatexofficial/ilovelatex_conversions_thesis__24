@@ -1,0 +1,170 @@
+\titleformat
+{\chapter}
+[display]
+{}
+{ \rule{\textwidth}{4pt}
+  \vspace{-1.7ex}
+    \centering
+\MakeUppercase{{{\Huge I}{\LARGE ntroduction}}}}
+{0.05ex}
+{
+    \vspace{1ex}
+    \centering
+    \color{white}
+}
+[
+  \color{black}
+\vspace{-0.5ex}%
+\rule{\textwidth}{4pt}
+]
+\renewcommand{\thechapter}{}
+\renewcommand \thesection {\Roman{section}}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{Introduction générale}
+\fancyhead[RE]{Introduction générale}
+\chapter{Introduction générale}
+\minitoc
+
+\addcontentsline{toc}{chapter}{Introduction générale}
+
+Au cours des dernières décennies, le monde a connu une transformation numérique profonde, touchant l'ensemble des secteurs d'activité, qu'il s'agisse de l'industrie, des services, du commerce ou encore des administrations publiques. Cette transition s'est accélérée avec l'émergence de nouvelles technologies, la généralisation d'Internet, la dématérialisation des processus et la dépendance croissante des organisations vis-à-vis de leurs infrastructures informatiques.\par
+
+Aujourd'hui, la performance d'une entreprise ne se mesure plus uniquement à travers ses capacités humaines, matérielles ou financières, mais également par la qualité, la fiabilité et l'organisation de son système d'information. La gestion efficace du parc informatique (postes utilisateurs, serveurs, équipements réseau, logiciels, licences, périphériques divers) constitue ainsi un \textbf{enjeu stratégique majeur} , permettant de garantir la continuité opérationnelle, d'optimiser les coûts, et d'assurer un niveau de sécurité conforme aux exigences actuelles.\par
+
+Dans ce contexte, de plus en plus d'organisations, y compris les petites et moyennes entreprises (PME), prennent conscience de l'importance de disposer d'un système structuré pour gérer, suivre et maintenir leur infrastructure IT. En Algérie, cette prise de conscience s'est renforcée avec l'essor de la digitalisation, la modernisation progressive des processus industriels et la nécessité pour les entreprises de rester compétitives dans un marché en constante évolution.\par
+
+\section{Contexte général et enjeux}
+
+La gestion du parc informatique ne se limite plus à inventorier les machines et les logiciels. Elle s'inscrit désormais dans une démarche globale associant :\par
+
+\begin{itemize}
+\item O ptimisation des ressources,
+\item S écurité informatique,
+\item G estion des coûts,
+\item D isponibilité des équipements,
+\item T raçabilité des interventions,
+\item P rise de décision basée sur des données fiables.
+\end{itemize}
+
+Une infrastructure informatique mal gérée peut engendrer :\par
+
+\begin{itemize}
+\item D es interruptions de service,
+\item D es pertes de données,
+\item D es baisses de productivité,
+\item D es coûts non maîtrisés,
+\item D es risques de cybersécurité,
+\item U ne mauvaise planification des investissements technologiques.
+\end{itemize}
+
+À l'inverse, une gestion centralisée et structurée permet :\par
+
+\begin{itemize}
+\item Un suivi précis du cycle de vie des équipements,
+\item Une maintenance proactive,
+\item Une réduction des incidents,
+\item Une meilleure répartition des ressources,
+\item Une prise de décision éclairée,
+\item Une amélioration globale de la performance opérationnelle.
+\end{itemize}
+
+\section{Contexte spécifique de l'entreprise GERMA GLACES}
+
+GERMA GLACES, entreprise industrielle spécialisée dans la production et la distribution de glaces et desserts surgelés, s'appuie sur une infrastructure informatique hétérogène pour assurer ses activités administratives, commerciales, logistiques et opérationnelles. Bien qu'elle ne soit pas une entreprise du secteur technologique, son fonctionnement quotidien dépend fortement de :\par
+
+\begin{itemize}
+\item Postes administratifs,
+\item Outils bureautiques,
+\item Systèmes de suivi de production,
+\item Solutions informatiques métiers,
+\item Équipements réseau et st ockage.
+\end{itemize}
+
+Comme beaucoup de PME algériennes, la croissance progressive de l'entreprise a entraîné une augmentation significative du nombre d'équipements informatiques. Cependant, l'absence d'un système d'information dédié à la gestion du parc a conduit à une organisation fragmentée, reposant sur :\par
+
+\begin{itemize}
+\item Des fichiers Excel non centralisés,
+\item Des mises à jour manuelles,
+\item Un suivi irrégulier des interventions,
+\item Un manque de traçabilité,
+\item Des risques d'obsolescence non anticipés.
+\end{itemize}
+
+Cette situation engendre des limites importantes, notamment :\par
+
+\begin{itemize}
+\item Absence de vision globale du parc,
+\item Difficulté à planifier les renouvellements,
+\item Perte d'informations,
+\item Temps de traitement des pannes allongé,
+\item Manque d'indicateurs fiables pour le pilotage,
+\item Dépendance à la mémoire humaine.
+\end{itemize}
+
+Ainsi, la mise en place d'une solution informatique centralisée devient une nécessité.\par
+
+\section{Problématique}
+
+Face aux enjeux identifiés, la problématique principale de ce mémoire peut être formulée comme suit :\par
+
+\textbf{Comment concevoir et développer une application web capable d'assurer une gestion efficace, centralisée et évolutive du parc informatique de l'entreprise GERMA GLACES, afin d'optimiser le suivi des équipements, d'améliorer la traçabilité des interventions et de renforcer la prise de décision ?}\par
+
+Cette question soulève plusieurs sous-questions :\par
+
+\begin{itemize}
+\item Comment structurer les informations relatives au matériel ?
+\item Comment automatiser la déclaration, le traitement et le suivi des incidents ?
+\item Comment intégrer des outils de reporting et d'analyse ?
+\item Comment garantir la sécurité, la disponibilité et la fiabilité des données ?
+\end{itemize}
+
+\section{Objectifs du projet}
+
+\textbf{Objectif général :} Concevoir et réaliser une application web dédiée à la gestion du parc informatique de l'entreprise GERMA GLACES.\par
+
+\textbf{Objectifs spécifiques :}\par
+
+\begin{itemize}
+\item Centraliser l'ensemble des informations liées aux équipements, utilisateurs et interventions.
+\item Automatiser les processus de maintenance et de mise à jour du matériel.
+\item Mettre en place une base de données fiable et structurée.
+\item Offrir une interface intuitive permettant la déclaration et le suivi des incidents.
+\item Intégrer des tableaux de bord pour faciliter la prise de décision.
+\item Améliorer la traçabilité, la sécurité et la disponibilité des informations.
+\item Réduire l'utilisation de supports non fiables (Excel, notes manuelles).
+\end{itemize}
+
+\section{Choix technologiques}
+
+L'application sera développée en :\par
+
+\begin{itemize}
+\item \textbf{PHP orienté objet (POO)} : langage robuste, largement utilisé, idéal pour des architectures MVC.
+\item \textbf{MySQL} : système de gestion de base de données performant, adapté aux besoins des PME.
+\item \textbf{HTML/CSS/JS} : pour l'interface utilisateur.
+\item \textbf{PlantUML} : pour modéliser l'ensemble des diagrammes UML.
+\end{itemize}
+
+Ces technologies ont été retenues pour leur simplicité, leur compatibilité avec les environnements existants, leur faible coût et leur capacité à répondre aux besoins fonctionnels du projet.\par
+
+\section{Méthodologie adoptée}
+
+Le projet suit quatre étapes principales :\par
+
+\begin{itemize}
+\item \textbf{Étude de l'entreprise et analyse de l'existant}
+\item \textbf{Conception du système (UML)}
+\item \textbf{Développement de l'application web}
+\item \textbf{Validation et tests fonctionnels}
+\end{itemize}
+
+Cette démarche garantit une évolution cohérente du projet, de la compréhension du besoin jusqu'à la mise en œuvre de la solution.\par
+
+\section{Structure du mémoire}
+
+\begin{itemize}
+\item \textbf{Chapitre 1 :} Présentation de l'entreprise GERMA GLACES
+\item \textbf{Chapitre 2 :} Étude de l'existant
+\item \textbf{Chapitre 3 :} Étude conceptuelle (UML)
+\item \textbf{Chapitre 4 :} Réalisation et implémentation
+\end{itemize}
