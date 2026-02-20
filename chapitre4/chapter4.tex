@@ -1,0 +1,912 @@
+\titleformat
+{\chapter}
+[display]
+{}
+{ \rule{\textwidth}{2pt}
+  \vspace{-2.7ex}
+    \centering
+\MakeUppercase{C\footnotesize{hapitre} \ \Large\thechapter}}
+{0.05ex}
+{
+    \rule{\textwidth}{0.5pt}
+    \vspace{1ex}
+    \centering
+    \bfseries\Large
+}
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{2pt}
+]
+\renewcommand \thesection {\arabic{chapter}.\arabic{section}}
+\renewcommand \thechapter {\arabic{chapter}}
+\fancyhead[LO]{ {\footnotesize\leftmark} }
+\chapter{Conception et réalisation du système}
+\minitoc
+
+\section{Introduction du chapitre}
+
+Le présent chapitre est consacré à la conception technique et à la réalisation du système de gestion du parc informatique de l'entreprise GERMA GLACES. Il s'inscrit dans la continuité directe du Chapitre 3, qui a permis de définir de manière formelle et structurée les besoins fonctionnels du futur système à travers une modélisation conceptuelle UML.\par
+
+Alors que le chapitre précédent s'est attaché à décrire ce que le système doit faire, à identifier les acteurs, les cas d'utilisation, les données métier et les règles de gestion, ce chapitre a pour objectif de montrer comment ces éléments ont été concrètement mis en œuvre sous la forme d'une application web fonctionnelle. Il constitue ainsi une étape charnière entre la phase de conception et la phase de mise en œuvre opérationnelle du projet.\par
+
+Dans ce chapitre, l'accent est mis sur les choix techniques et architecturaux retenus pour la réalisation du système, ainsi que sur leur justification au regard des contraintes de l'entreprise et des objectifs du projet. L'architecture générale de l'application est d'abord présentée afin de situer le cadre global de fonctionnement du système. La conception de la base de données est ensuite détaillée, en montrant la transformation du modèle conceptuel UML en un modèle relationnel structuré et normalisé.\par
+
+Le chapitre aborde également la réalisation de l'application web, en décrivant les principaux modules fonctionnels implémentés, tels que la gestion des utilisateurs, des équipements, des affectations, des pannes, des opérations de maintenance et de la mise à la réforme du matériel. Une attention particulière est portée à la cohérence entre les fonctionnalités développées et les cas d'utilisation définis lors de l'étude conceptuelle.\par
+
+Par ailleurs, les interfaces utilisateur sont présentées afin de mettre en évidence l'ergonomie de l'application et la manière dont les différents acteurs interagissent avec le système selon leurs rôles. Les aspects liés à la sécurité et à la gestion des accès sont également abordés, dans le but de garantir la protection des données et le respect des droits d'accès définis. Enfin, le chapitre se conclut par la présentation des tests de validation, des limites identifiées et des perspectives d'évolution du système.\par
+
+Ainsi, ce chapitre vise à démontrer que la solution proposée n'est pas uniquement théorique, mais qu'elle repose sur une réalisation concrète, cohérente et exploitable, répondant aux besoins réels de l'entreprise GERMA GLACES et s'inscrivant dans une démarche professionnelle de développement de système d'information.\par
+
+\section{Architecture générale du système}
+
+\subsection{Architecture globale de l'application}
+
+Le système de gestion du parc informatique de l'entreprise GERMA GLACES a été conçu selon une architecture web client–serveur, permettant un accès centralisé à l'application depuis différents postes utilisateurs au sein de l'entreprise. Ce choix s'inscrit dans une logique de simplicité de déploiement, de facilité d'accès et de maintenance, tout en répondant aux contraintes d'une PME disposant de ressources informatiques limitées.\par
+
+Dans cette architecture, l'utilisateur accède à l'application à travers un navigateur web, sans nécessiter l'installation d'un logiciel spécifique sur son poste. Les requêtes émises par le client sont transmises à un serveur web, qui héberge l'application et assure le traitement des demandes. Les données nécessaires au fonctionnement du système sont stockées de manière centralisée dans une base de données relationnelle, garantissant la cohérence, la sécurité et la traçabilité des informations.\par
+
+L'architecture globale repose ainsi sur trois éléments principaux : le client, représenté par le navigateur web de l'utilisateur, le serveur applicatif chargé de traiter la logique métier et de gérer les interactions avec les utilisateurs, et la base de données assurant la persistance des données relatives aux équipements, utilisateurs, pannes, affectations et opérations de maintenance. Cette organisation permet une séparation claire des responsabilités et facilite l'évolution future du système.\par
+
+\subsection{Architecture logique de l'application}
+
+Afin de structurer le développement de l'application et d'améliorer sa maintenabilité, une architecture logique en couches a été adoptée. Cette architecture repose sur le principe de séparation des préoccupations, chaque couche étant responsable d'un rôle précis dans le fonctionnement global du système.\par
+
+La couche présentation correspond à l'interface utilisateur de l'application. Elle est responsable de l'affichage des informations et de la collecte des actions de l'utilisateur. La couche logique métier constitue le cœur fonctionnel de l'application et implémente les règles de gestion définies lors de l'étude conceptuelle. Enfin, la couche accès aux données est chargée de la communication avec la base de données et assure l'intégrité des informations.\par
+
+Cette organisation en couches améliore la lisibilité du code, limite les dépendances entre les différentes parties du système et facilite la maintenance ainsi que les évolutions ultérieures.\par
+
+\subsection{Justification du choix de l'architecture MVC}
+
+Dans le cadre de la réalisation de l'application web de gestion du parc informatique, le modèle architectural MVC (Modèle – Vue – Contrôleur) a été retenu. Ce choix s'explique par sa large adoption dans le développement d'applications web professionnelles, mais surtout par les avantages significatifs qu'il offre en matière de structuration du code, de séparation des responsabilités et de maintenabilité du système.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_014.png}
+\caption{Figure 28 : Architecture du paterne MVC}
+\label{fig:27}
+\end{figure}
+
+Figure 28 : Architecture du paterne MVC\par
+
+L'application développée présente un niveau de complexité non négligeable, notamment en raison de la présence de plusieurs profils utilisateurs (Administrateur, Responsable informatique et Employé), de la diversité des modules fonctionnels à implémenter (gestion des utilisateurs, des équipements, des affectations, des pannes et interventions, de la maintenance ainsi que de la réforme du matériel), ainsi que des exigences en matière de sécurité, telles que la gestion des sessions et le contrôle des accès selon les rôles. Dans un tel contexte, une approche reposant sur des scripts PHP non structurés aurait rapidement conduit à une duplication du code, à des pages difficiles à maintenir, à des risques accrus de failles de sécurité et à des difficultés d'évolution du système.\par
+
+Le modèle MVC repose sur une séparation claire des responsabilités. Le Modèle représente la couche chargée de la gestion des données et de la logique métier. Il assure l'interaction directe avec la base de données MySQL à travers l'utilisation de PDO, prend en charge l'exécution des requêtes SQL et applique les règles de validation nécessaires côté serveur. Cette centralisation de la logique métier garantit la cohérence et la fiabilité des traitements effectués sur les données.\par
+
+La Vue correspond à la couche de présentation. Elle est responsable de l'affichage des informations à l'utilisateur sous forme de pages HTML, de formulaires et de tableaux, ainsi que de la restitution des messages d'erreur ou de succès. La vue ne contient aucune logique métier, ce qui permet de modifier l'interface utilisateur sans impacter le fonctionnement interne de l'application.\par
+
+Le Contrôleur joue un rôle d'intermédiaire entre le modèle et la vue. Il reçoit les requêtes de l'utilisateur, vérifie les droits d'accès en fonction du rôle connecté, déclenche les traitements appropriés en faisant appel aux modèles concernés, puis sélectionne la vue à afficher ou effectue les redirections nécessaires. Cette couche constitue un point central pour l'implémentation des règles de sécurité et de contrôle du flux de l'application.\par
+
+L'adoption de l'architecture MVC permet ainsi de rendre l'application plus modulaire, plus lisible et plus évolutive. Elle facilite l'ajout de nouvelles fonctionnalités ou la modification de modules existants sans remettre en cause l'ensemble du système. Par ailleurs, ce choix architectural assure une cohérence globale entre la conception UML présentée au Chapitre 3 et l'implémentation technique décrite dans ce chapitre, garantissant ainsi une continuité logique entre la phase de conception et la phase de réalisation.\par
+
+\section{Environnement de développement et outils utilisés}
+
+\subsection{Environnement matériel et logiciel}
+
+La réalisation du système de gestion du parc informatique de l'entreprise GERMA GLACES a été menée dans un environnement de développement local, soigneusement configuré afin de reproduire au mieux les conditions de fonctionnement d'une application web en situation réelle. Ce choix permet de disposer d'un cadre de travail maîtrisé, sécurisé et indépendant de l'infrastructure informatique opérationnelle de l'entreprise.\par
+
+Le développement a été effectué sur un poste informatique standard, disposant de ressources matérielles suffisantes pour exécuter simultanément un serveur web, un serveur de base de données et les outils de développement. Cette configuration correspond aux moyens généralement disponibles dans une PME, ce qui renforce la cohérence entre la solution développée et le contexte réel de de l'entreprise GERMA GLACES.\par
+
+Un serveur web local a été installé afin d'héberger l'application durant toute la phase de développement et de test. Ce serveur permet de traiter les requêtes HTTP, d'exécuter les scripts côté serveur et de restituer dynamiquement les pages web. L'utilisation d'un serveur local facilite les phases de test itératif et de débogage.\par
+
+La base de données relationnelle est également hébergée en local. Elle constitue un composant central du système, assurant le stockage structuré et cohérent des données métier. Des données de test réalistes ont été utilisées afin de simuler des scénarios proches des conditions réelles d'exploitation du système.\par
+
+\subsection{Technologies de développement}
+
+Le choix des technologies de développement repose sur une démarche pragmatique orientée vers la simplicité, la robustesse et l'adéquation avec les besoins d'une PME. Le langage PHP a été utilisé pour le développement côté serveur afin d'implémenter la logique métier du système, de traiter les requêtes des utilisateurs et de gérer les sessions et les contrôles d'accès selon les rôles.\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_010.png}
+\caption{Figure 28}
+\label{fig:28}
+\end{figure}
+
+Les interfaces utilisateur ont été développées à l'aide des technologies HTML, CSS et JavaScript. HTML assure la structuration des pages, CSS garantit une présentation claire et homogène, tandis que JavaScript apporte un niveau d'interactivité améliorant l'expérience utilisateur.\par
+
+La persistance des données est assurée par le système de gestion de base de données MySQL, choisi pour sa fiabilité et sa capacité à gérer efficacement les données dans le cadre d'une application web de gestion.\par
+
+\subsection{Outils de développement, de test et de modélisation}
+
+Plusieurs outils ont été mobilisés afin de garantir un développement structuré et conforme aux bonnes pratiques. Un éditeur de code a été utilisé pour la rédaction et la maintenance des fichiers source de l'application.\par
+
+Les tests fonctionnels ont été réalisés à l'aide de navigateurs web afin de vérifier le fonctionnement des différentes fonctionnalités du système du point de vue des utilisateurs finaux. Ces tests ont été menés de manière progressive et itérative.\par
+
+Pour la phase de conception, l'outil PlantUML a été utilisé afin de produire les diagrammes UML présentés au Chapitre 3. Ces diagrammes ont servi de référence tout au long de la phase de réalisation, garantissant la cohérence entre la modélisation conceptuelle et l'implémentation technique.\par
+
+\section{Conception de la base de données}
+
+\subsection{Passage du modèle conceptuel au modèle relationnel}
+
+La conception de la base de données constitue une étape essentielle dans la réalisation du système de gestion du parc informatique de l'entreprise GERMA GLACES. Elle a pour objectif de traduire le modèle conceptuel UML, défini et validé au Chapitre 3, en un modèle relationnel exploitable par un système de gestion de base de données relationnelle.\par
+
+Le diagramme de classes conceptuel a servi de référence principale pour cette transformation. Chaque classe identifiée a été convertie en une table relationnelle, tandis que les attributs des classes ont été traduits en champs de tables. Les relations entre les classes ont été matérialisées par des clés étrangères, permettant de préserver les liens logiques entre les différentes entités du système.\par
+
+Une attention particulière a été portée à la structuration et à la cohérence des données, afin de limiter les redondances et d'assurer la fiabilité des informations stockées. Le modèle relationnel obtenu respecte les principes fondamentaux de normalisation, garantissant que chaque information est stockée à un seul endroit et dépend uniquement de la clé de son entité. Cette approche facilite la maintenance de la base de données et réduit les risques d'incohérences lors des mises à jour.\par
+
+La classe Équipement, identifiée comme l'élément pivot du système, occupe une place centrale dans le modèle relationnel. L'ensemble des informations et des opérations liées au cycle de vie du matériel (affectation, panne, intervention, maintenance, acquisition et réforme) s'articule autour de cette entité centrale, assurant ainsi une traçabilité complète des équipements.\par
+
+\subsection{Modèle relationnel de la base de données}
+
+Le modèle relationnel retenu repose sur un ensemble de tables structurées, chacune correspondant à une entité métier identifiée lors de l'étude conceptuelle. L'organisation de ces tables permet de couvrir l'ensemble des besoins fonctionnels du système, depuis la gestion des utilisateurs jusqu'au suivi détaillé du cycle de vie des équipements.\par
+
+La gestion des utilisateurs et des accès est assurée par les tables Utilisateur et Rôle, qui permettent de définir les profils d'accès et de contrôler les droits d'utilisation du système. Chaque utilisateur est associé à un rôle unique, garantissant une gestion claire et centralisée des permissions.\par
+
+Le cœur du système est représenté par la table Équipement, qui recense l'ensemble du parc informatique. Afin d'éviter toute redondance et d'améliorer la lisibilité du modèle, les caractéristiques techniques des équipements ont été réparties dans des tables distinctes, à savoir TypeEquipement , Marque et Modèle. Cette organisation permet de mutualiser les informations communes à plusieurs équipements et de faciliter l'évolution du parc informatique.\par
+
+La table Affectation assure la traçabilité des mouvements du matériel en enregistrant l'attribution des équipements aux utilisateurs sur une période donnée. Elle permet de conserver l'historique des affectations tout en garantissant qu'un équipement ne peut être affecté qu'à un seul utilisateur à un instant donné.\par
+
+La gestion des incidents repose sur la table Panne, qui permet d'enregistrer les pannes déclarées par les utilisateurs et d'en suivre l'évolution. Les actions techniques réalisées sont consignées dans la table Intervention, assurant un historique détaillé des traitements effectués par le service informatique.\par
+
+Les opérations de maintenance sont gérées à travers la table Maintenance, qui permet de planifier et de tracer les maintenances préventives et correctives. Les opérations d'acquisition sont quant à elles suivies à l'aide des tables BonAcquisition et Fournisseur, garantissant une traçabilité complète des équipements dès leur entrée dans le parc.\par
+
+Enfin, la gestion des consommables et des pièces de rechange est prise en charge par les tables Article et NomenclatureEquipement , permettant d'associer des articles spécifiques à des modèles d'équipements et de faciliter la planification des besoins en maintenance.\par
+
+\subsection{Contraintes d'intégrité et justification des choix}
+
+Le modèle relationnel intègre des contraintes d'intégrité destinées à garantir la cohérence et la fiabilité des données. Des clés primaires assurent l'unicité des enregistrements, tandis que des clés étrangères permettent de maintenir les relations entre les différentes tables. Des contraintes supplémentaires contribuent à prévenir les incohérences.\par
+
+Les choix de conception effectués visent à proposer une base de données simple, cohérente et évolutive, adaptée aux besoins réels de l'entreprise GERMA GLACES. La séparation des entités, la centralisation des informations critiques et la traçabilité des opérations constituent des éléments essentiels pour garantir la fiabilité du système.\par
+
+Ainsi, la base de données conçue constitue un socle solide pour la réalisation de l'application web de gestion du parc informatique. Elle assure une structuration claire des données, une cohérence avec la modélisation UML définie au Chapitre 3 et une capacité d'évolution future du système.\par
+
+\subsection{Mise en place de la base de données (MySQL)}
+
+\textbf{Objectif de l'étape}\par
+
+On va mettre en place un schéma relationnel fidèle au mémoire :\par
+
+\textbf{Sécurité / accès} : tables roles , utilisateurs (un utilisateur a un seul rôle)\par
+
+\textbf{Parc} : equipements + tables de référence types\_equipement , marques, modeles pour éviter la redondance\par
+
+\textbf{Cycle de vie} : affectations, pannes, interventions, maintenances\par
+
+\textbf{Acquisition} : fournisseurs, bons\_acquisition\par
+
+\textbf{Consommables} : articles, nomenclatures\_equipement\par
+
+\textbf{Réforme} : une “demande de réforme” avec statut + décision tracée (date, auteur, commentaire)\par
+
+\subsubsection{Le script SQL :}
+
+-- =========================================================\par
+
+-- GPI (Gestion Parc Informatique) - Schema DB (MySQL)\par
+
+-- ( GERMA GLACES) - --\par
+
+=========================================================\par
+
+CREATE DATABASE IF NOT EXISTS gpi\par
+
+CHARACTER SET utf8mb4\par
+
+COLLATE utf8mb4\_unicode\_ ci;\par
+
+USE gpi ;\par
+
+-- -------------------------\par
+
+-- 1) Sécurité / Accès\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS roles (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+libelle VARCHAR(50) NOT NULL UNIQUE\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS utilisateurs (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+role \_id INT UNSIGNED NOT NULL,\par
+
+nom VARCHAR(80) NOT NULL,\par
+
+prenom VARCHAR(80) NOT NULL,\par
+
+fonction VARCHAR(120) NULL,\par
+
+email VARCHAR(150) NOT NULL UNIQUE,\par
+
+password \_hash VARCHAR(255) NOT NULL,\par
+
+statut \_compte ENUM('ACTIF','INACTIF') NOT NULL DEFAULT 'ACTIF',\par
+
+created \_at DATETIME NOT NULL DEFAULT CURRENT\_TIMESTAMP,\par
+
+updated \_at DATETIME NULL DEFAULT NULL ON UPDATE CURRENT\_TIMESTAMP,\par
+
+CONSTRAINT fk\_utilisateurs\_role\par
+
+FOREIGN KEY ( role\_id ) REFERENCES roles (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 2) Référentiels Parc\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS types\_equipement (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+libelle VARCHAR(80) NOT NULL UNIQUE\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS marques (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+nom VARCHAR(120) NOT NULL UNIQUE\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS modeles (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+marque \_id INT UNSIGNED NOT NULL,\par
+
+type \_id INT UNSIGNED NOT NULL,\par
+
+reference VARCHAR(120) NOT NULL,\par
+
+description VARCHAR(255) NULL,\par
+
+UNIQUE ( marque\_id , type\_id , reference ),\par
+
+CONSTRAINT fk\_modeles\_marque\par
+
+FOREIGN KEY ( marque\_id ) REFERENCES marques(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_modeles\_type\par
+
+FOREIGN KEY ( type\_id ) REFERENCES types\_equipement (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 3) Acquisition\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS fournisseurs (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+raison \_sociale VARCHAR(180) NOT NULL UNIQUE,\par
+
+telephone VARCHAR(40) NULL,\par
+
+email VARCHAR(150) NULL,\par
+
+adresse VARCHAR(255) NULL\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS bons\_acquisition (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+fournisseur \_id INT UNSIGNED NOT NULL,\par
+
+reference VARCHAR(80) NOT NULL UNIQUE,\par
+
+date \_acquisition DATE NOT NULL,\par
+
+montant DECIMAL(12,2) NULL,\par
+
+CONSTRAINT fk\_ba\_fournisseur\par
+
+FOREIGN KEY ( fournisseur\_id ) REFERENCES fournisseurs(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 4) Équipement (pivot)\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS equipements (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+modele \_id INT UNSIGNED NOT NULL,\par
+
+bon \_acquisition\_id INT UNSIGNED NOT NULL,\par
+
+code \_inventaire VARCHAR(60) NOT NULL UNIQUE,\par
+
+numero \_serie VARCHAR(120) NULL UNIQUE,\par
+
+etat ENUM('OPERATIONNEL','EN\_PANNE','EN\_MAINTENANCE','REFORME' ,'NON\_AFFECTE' ) NOT NULL DEFAULT 'OPERATIONNEL',\par
+
+date \_acquisition DATE NULL,\par
+
+localisation VARCHAR(180) NULL,\par
+
+created \_at DATETIME NOT NULL DEFAULT CURRENT\_TIMESTAMP,\par
+
+updated \_at DATETIME NULL DEFAULT NULL ON UPDATE CURRENT\_TIMESTAMP,\par
+
+CONSTRAINT fk\_equipements\_modele\par
+
+FOREIGN KEY ( modele\_id ) REFERENCES modeles (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_equipements\_bon\_acquisition\par
+
+FOREIGN KEY ( bon\_acquisition\_id ) REFERENCES bons\_acquisition (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 5) Affectations (historique)\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS affectations (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+equipement \_id INT UNSIGNED NOT NULL,\par
+
+utilisateur \_id INT UNSIGNED NOT NULL,\par
+
+date \_affectation DATE NOT NULL,\par
+
+date \_fin DATE NULL,\par
+
+statut ENUM('EN\_COURS','TERMINEE') NOT NULL DEFAULT 'EN\_COURS',\par
+
+CONSTRAINT fk\_affectations\_equipement\par
+
+FOREIGN KEY ( equipement\_id ) REFERENCES equipements (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_affectations\_utilisateur\par
+
+FOREIGN KEY ( utilisateur\_id ) REFERENCES utilisateurs(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 6) Incidents (pannes) + interventions\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS pannes (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+equipement \_id INT UNSIGNED NOT NULL,\par
+
+declaree \_par INT UNSIGNED NOT NULL,\par
+
+date \_declaration DATETIME NOT NULL DEFAULT CURRENT\_TIMESTAMP,\par
+
+description TEXT NOT NULL,\par
+
+statut ENUM('OUVERTE','EN\_COURS','CLOTUREE') NOT NULL DEFAULT 'OUVERTE',\par
+
+CONSTRAINT fk\_pannes\_equipement\par
+
+FOREIGN KEY ( equipement\_id ) REFERENCES equipements (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_pannes\_declaree\_par\par
+
+FOREIGN KEY ( declaree\_par ) REFERENCES utilisateurs(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS interventions (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+panne \_id INT UNSIGNED NOT NULL,\par
+
+technicien \_id INT UNSIGNED NOT NULL,\par
+
+date \_intervention DATETIME NOT NULL DEFAULT CURRENT\_TIMESTAMP,\par
+
+action \_realisee TEXT NOT NULL,\par
+
+resultat TEXT NULL,\par
+
+CONSTRAINT fk\_interventions\_panne\par
+
+FOREIGN KEY ( panne\_id ) REFERENCES pannes(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_interventions\_technicien\par
+
+FOREIGN KEY ( technicien\_id ) REFERENCES utilisateurs(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 7) Maintenance (préventive/corrective)\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS maintenances (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+equipement \_id INT UNSIGNED NOT NULL,\par
+
+panne \_id INT UNSIGNED NULL, -- si maintenance liée à une panne\par
+
+type \_maintenance ENUM('PREVENTIVE','CORRECTIVE') NOT NULL,\par
+
+date \_realisation DATE NOT NULL,\par
+
+description TEXT NOT NULL,\par
+
+CONSTRAINT fk\_maintenances\_equipement\par
+
+FOREIGN KEY ( equipement\_id ) REFERENCES equipements (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_maintenances\_panne\par
+
+FOREIGN KEY ( panne\_id ) REFERENCES pannes(id)\par
+
+ON UPDATE CASCADE ON DELETE SET NULL\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 8) Consommables \& pièces (articles + nomenclature)\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS articles (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+libelle VARCHAR(180) NOT NULL,\par
+
+type \_article ENUM('CONSOMMABLE','PIECE\_RECHANGE') NOT NULL,\par
+
+UNIQUE (libelle, type\_article )\par
+
+) ENGINE= InnoDB ;\par
+
+CREATE TABLE IF NOT EXISTS nomenclatures\_equipement (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+modele \_id INT UNSIGNED NOT NULL,\par
+
+article \_id INT UNSIGNED NOT NULL,\par
+
+quantite \_standard INT UNSIGNED NOT NULL DEFAULT 1,\par
+
+UNIQUE ( modele\_id , article\_id ),\par
+
+CONSTRAINT fk\_nom\_modele\par
+
+FOREIGN KEY ( modele\_id ) REFERENCES modeles (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_nom\_article\par
+
+FOREIGN KEY ( article\_id ) REFERENCES articles(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT\par
+
+) ENGINE= InnoDB ;\par
+
+-- -------------------------\par
+
+-- 9) Réforme (demande + décision tracée)\par
+
+-- -------------------------\par
+
+CREATE TABLE IF NOT EXISTS reformes (\par
+
+id INT UNSIGNED AUTO\_INCREMENT PRIMARY KEY,\par
+
+equipement \_id INT UNSIGNED NOT NULL,\par
+
+demandee \_par INT UNSIGNED NOT NULL, -- responsable informatique\par
+
+date \_demande DATETIME NOT NULL DEFAULT CURRENT\_TIMESTAMP,\par
+
+motif TEXT NOT NULL,\par
+
+statut ENUM('EN\_ATTENTE','VALIDEE','REJETEE') NOT NULL DEFAULT 'EN\_ATTENTE',\par
+
+decision \_par INT UNSIGNED NULL, -- admin\par
+
+date \_decision DATETIME NULL,\par
+
+commentaire \_decision TEXT NULL,\par
+
+CONSTRAINT fk\_reformes\_equipement\par
+
+FOREIGN KEY ( equipement\_id ) REFERENCES equipements (id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_reformes\_demandee\_par\par
+
+FOREIGN KEY ( demandee\_par ) REFERENCES utilisateurs(id)\par
+
+ON UPDATE CASCADE ON DELETE RESTRICT,\par
+
+CONSTRAINT fk\_reformes\_decision\_par\par
+
+FOREIGN KEY ( decision\_par ) REFERENCES utilisateurs(id)\par
+
+ON UPDATE CASCADE ON DELETE SET NULL\par
+
+) ENGINE= InnoDB ;\par
+
+-- Index utiles (performance + filtres fréquents)\par
+
+CREATE INDEX idx\_affectations\_equipement ON affectations( equipement\_id );\par
+
+CREATE INDEX idx\_affectations\_utilisateur ON affectations( utilisateur\_id );\par
+
+CREATE INDEX idx\_pannes\_statut ON pannes(statut );\par
+
+CREATE INDEX idx\_reformes\_statut ON reformes(statut );\par
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/fig_006.png}
+\caption{Figure 29: Le modèle relationnel de la base de données du système de gestion du parc informatique de l'entreprise GERMA GLACES.}
+\label{fig:29}
+\end{figure}
+
+Figure 29 : Le modèle relationnel de la base de données du système de gestion du parc informatique de l'entreprise GERMA GLACES.\par
+
+\section{Réalisation de l'application web}
+
+\subsection{Introduction à la réalisation de l'application web}
+
+\subsubsection{Démarche de conception et prescription technique}
+
+La présente section constitue un document de synthèse et de cadrage technique de la phase de réalisation de l'application web de gestion du parc informatique de l'entreprise \textbf{GERMA GLACES} . Elle a pour objectif de présenter, de manière globale et structurée, la démarche adoptée pour le développement de l'application, depuis la préparation de l'environnement jusqu'à la mise en œuvre des mécanismes de sécurité, en cohérence avec l'analyse des besoins et la conception UML présentées dans les chapitres précédents.\par
+
+Ce document joue un double rôle :\par
+
+\begin{itemize}
+\item Il sert de \textbf{guide de lecture} pour comprendre la logique et l'enchaînement des sections détaillées de la réalisation,
+\item Il constitue également un \textbf{document de référence et de révision technique} , permettant de saisir rapidement l'architecture globale et les choix structurants effectués lors du développement de l'application.
+\end{itemize}
+
+\subsubsection{Préparation de l'environnement de développement}
+
+La première étape de la réalisation a consisté à mettre en place un environnement de développement local stable et adapté au contexte du projet. Un serveur local de type \textbf{XAMPP} a été utilisé, intégrant les composants nécessaires au fonctionnement de l'application, à savoir un serveur Apache, le langage PHP et le système de gestion de base de données MySQL.\par
+
+Cette phase a permis de :\par
+
+\begin{itemize}
+\item configurer un environnement de test identique à celui d'un déploiement réel,
+\item faciliter le développement itératif et les tests fonctionnels,
+\item assurer la reproductibilité de l'application sur d'autres postes.
+\end{itemize}
+
+La mise en place d'un contrôle de version (Git) dès le début du projet a également permis de structurer le travail, de tracer les évolutions et de sécuriser les différentes étapes de développement.\par
+
+\subsubsection{Choix et justification de l'architecture MVC}
+
+Afin de garantir une application structurée, maintenable et évolutive, le choix s'est porté sur l'architecture \textbf{MVC (Modèle – Vue – Contrôleur)} . Ce modèle architectural permet une séparation claire des responsabilités :\par
+
+\begin{itemize}
+\item Le \textbf{Modèle} gère les données et la logique métier, ainsi que les interactions avec la base de données MySQL via PDO ;
+\item La \textbf{Vue} est responsable de l'affichage et de l'interface utilisateur ;
+\item Le \textbf{Contrôleur} agit comme intermédiaire, en traitant les actions de l'utilisateur, en appliquant les règles métier et en sélectionnant les vues appropriées.
+\end{itemize}
+
+L'adoption du MVC assure une cohérence directe entre la conception UML réalisée au Chapitre 3 et l'implémentation technique, tout en facilitant la maintenance et l'évolution future de l'application.\par
+
+\subsubsection{Définition de l'arborescence des pages et des dossiers}
+
+Une arborescence claire et cohérente a été définie afin de refléter l'architecture MVC et d'organiser efficacement les différents composants de l'application. Les dossiers ont été structurés de manière à séparer explicitement les contrôleurs, les modèles, les vues, les ressources publiques et les fichiers de configuration.\par
+
+Cette organisation permet :\par
+
+\begin{itemize}
+\item Une navigation logique dans le projet,
+\item Une meilleure lisibilité du code,
+\item Une séparation nette entre la logique applicative et la présentation.
+\end{itemize}
+
+L'arborescence adoptée facilite également l'intégration de nouvelles fonctionnalités sans remise en cause de la structure existante.\par
+
+\subsubsection{Mise en place de la base de données (MySQL)}
+
+La base de données MySQL constitue le socle de l'application. Elle a été conçue à partir du modèle relationnel défini lors de la phase de conception, en respectant les principes de normalisation et d'intégrité des données.\par
+
+Les tables mises en place couvrent l'ensemble des besoins fonctionnels identifiés, notamment:\par
+
+\begin{itemize}
+\item Les utilisateurs et les rôles,
+\item Les équipements et leurs caractéristiques,
+\item Les affectations,
+\item Les pannes et interventions,
+\item Les maintenances,
+\item Les réformes.
+\end{itemize}
+
+L'utilisation de clés étrangères et de contraintes logiques garantit la cohérence des données et reflète fidèlement les relations définies dans les diagrammes UML.\par
+
+\subsubsection{Implémentation de l'authentification et de la gestion des rôles}
+
+L'application intègre un mécanisme d'authentification sécurisé basé sur des sessions PHP. Trois profils d'utilisateurs ont été définis conformément aux besoins du système :\par
+
+\begin{itemize}
+\item \textbf{Administrateur}
+\item \textbf{Responsable informatique}
+\item \textbf{Employé}
+\end{itemize}
+
+Chaque rôle dispose de droits d'accès spécifiques, contrôlés de manière centralisée au niveau des contrôleurs. Cette gestion fine des autorisations permet de restreindre l'accès aux fonctionnalités sensibles et de garantir une utilisation conforme aux responsabilités de chaque profil.\par
+
+\subsubsection{Développement des fonctionnalités principales}
+
+La phase de développement fonctionnel a consisté à implémenter progressivement les modules identifiés dans le cahier des charges. Chaque fonctionnalité a été développée selon une logique CRUD ( Create , Read, Update, Delete ), en respectant les règles métier définies.\par
+
+Les principaux modules réalisés sont :\par
+
+\begin{itemize}
+\item La gestion des utilisateurs,
+\item La gestion des équipements,
+\item Les affectations d'équipements,
+\item La gestion des pannes et des interventions,
+\item La gestion des maintenances (préventive et corrective),
+\item La gestion des réformes.
+\end{itemize}
+
+Une attention particulière a été portée à la cohérence entre les modules, afin de permettre un enchaînement logique des opérations tout au long du cycle de vie d'un équipement.\par
+
+\subsubsection{Sécurisation de l'application}
+
+La sécurité de l'application a fait l'objet d'un traitement spécifique et transversal. Plusieurs mécanismes ont été mis en œuvre, notamment :\par
+
+\begin{itemize}
+\item La gestion sécurisée des sessions (régénération d'identifiant, expiration par inactivité),
+\item Le contrôle strict des accès par rôle,
+\item La protection contre les attaques CSRF par l'utilisation de jetons de sécurité,
+\item La conversion des actions sensibles en requêtes POST protégées.
+\end{itemize}
+
+Ces mesures contribuent à renforcer la fiabilité de l'application et à limiter les risques liés aux accès non autorisés ou aux manipulations malveillantes.\par
+
+\subsubsection{Fonctionnalités en perspectives}
+
+Bien que l'application réponde pleinement aux besoins définis dans le cadre du mémoire, certaines pistes d'évolution peuvent être envisagées, telles que :\par
+
+\begin{itemize}
+\item L'enrichissement de l'espace employé,
+\item L'ajout de tableaux de bord statistiques,
+\item L'intégration de notifications automatiques,
+\item La préparation d'un déploiement en environnement de production.
+\end{itemize}
+
+Ces perspectives ouvrent la voie à une évolution continue du système, sans remise en cause de l'architecture actuelle.\par
+
+\subsubsection{Conclusion de la démarche de réalisation}
+
+Ce document récapitulatif met en évidence une démarche de développement structurée, progressive et cohérente, allant de la conception à la mise en œuvre complète de l'application web de gestion du parc informatique. Les sections suivantes détaillent chacun des aspects techniques évoqués, en s'appuyant sur cette synthèse comme cadre de référence pour la compréhension globale de la réalisation.\par
+
+\subsection{Gestion des utilisateurs et des rôles}
+
+La gestion des utilisateurs et des rôles constitue une fonctionnalité fondamentale du système de gestion du parc informatique, car elle conditionne l'accès aux différentes fonctionnalités de l'application et garantit la sécurité des données. Cette fonctionnalité permet d'identifier les utilisateurs, de contrôler leurs droits et de définir précisément les actions qu'ils sont autorisés à effectuer.\par
+
+Le système prévoit la création et la gestion des comptes utilisateurs à partir d'une interface dédiée, accessible uniquement aux utilisateurs disposant des droits d'administration. Lors de la création d'un compte, les informations essentielles de l'utilisateur sont enregistrées, telles que l'identité, la fonction occupée au sein de l'entreprise et l'état du compte. Chaque utilisateur se voit attribuer un rôle unique, qui détermine son niveau d'accès à l'application.\par
+
+Trois rôles principaux ont été définis afin de répondre aux besoins organisationnels de l'entreprise GERMA GLACES. Le rôle administrateur dispose de droits étendus lui permettant de gérer l'ensemble des utilisateurs du système, de configurer les paramètres généraux de l'application et de superviser l'ensemble du parc informatique. Le rôle responsable informatique est chargé de la gestion opérationnelle du parc, notamment le suivi des équipements, le traitement des pannes, les opérations de maintenance et la validation de certaines actions techniques. Le rôle employé permet quant à lui aux utilisateurs finaux de consulter les équipements qui leur sont affectés, de déclarer des pannes et de suivre l'état de leurs demandes.\par
+
+L'authentification des utilisateurs est assurée par un mécanisme de connexion sécurisé, basé sur la saisie d'un identifiant et d'un mot de passe. À l'issue de l'authentification, une session utilisateur est ouverte, permettant au système de reconnaître l'utilisateur et d'appliquer automatiquement les droits correspondant à son rôle. Cette approche garantit que chaque utilisateur n'accède qu'aux fonctionnalités qui lui sont autorisées.\par
+
+La gestion des rôles est étroitement liée au contrôle des accès aux différentes fonctionnalités de l'application. Les interfaces, les menus et les actions disponibles sont adaptés dynamiquement en fonction du rôle de l'utilisateur connecté. Cette organisation permet de simplifier l'utilisation de l'application, d'éviter les erreurs de manipulation et de renforcer la sécurité globale du système.\par
+
+Ainsi, la gestion des utilisateurs et des rôles constitue un élément clé de la réalisation de l'application web. Elle assure une utilisation sécurisée et cohérente du système, tout en répondant aux exigences organisationnelles et fonctionnelles de l'entreprise GERMA GLACES.\par
+
+Figure 4.3 : Formulaire de création et de modification d'un utilisateur\par
+
+Figure 4.2 : Interface de gestion des utilisateurs\par
+
+Figure 4.1 : Interface d'authentification des utilisateurs\par
+
+\subsection{Gestion des équipements informatiques}
+
+La gestion des équipements informatiques constitue le cœur fonctionnel de l'application de gestion du parc informatique. Cette fonctionnalité permet d'assurer un inventaire précis, structuré et à jour de l'ensemble des équipements appartenant à l'entreprise GERMA GLACES, tout en garantissant le suivi de leur état tout au long de leur cycle de vie.\par
+
+Le système permet l'ajout de nouveaux équipements à partir d'une interface dédiée, accessible aux utilisateurs disposant des droits appropriés. Lors de l'enregistrement d'un équipement, les informations essentielles sont saisies, telles que le code d'inventaire, le numéro de série, le type d'équipement, la marque, le modèle, la date d'acquisition et l'état initial.\par
+
+Afin de garantir la cohérence et la fiabilité des données, l'application s'appuie sur des référentiels structurés pour la gestion des types d'équipements, des marques et des modèles. Cette approche évite les redondances, facilite la saisie des informations et assure une homogénéité dans la description du parc informatique.\par
+
+Le système offre également des fonctionnalités de modification et de mise à jour des informations relatives aux équipements. Afin de préserver l'historique du parc, la suppression physique est évitée au profit d'une suppression logique.\par
+
+La consultation des équipements est facilitée par des interfaces de liste et de recherche, permettant aux utilisateurs autorisés de visualiser l'ensemble du parc ou de filtrer les équipements selon différents critères.\par
+
+Ainsi, la gestion des équipements informatiques permet de disposer d'un inventaire fiable et centralisé du parc, indispensable à la prise de décision et à la planification des opérations de maintenance, d'affectation ou de renouvellement.\par
+
+Figure 4.5 : Formulaire de gestion des équipements\par
+
+Figure 4.4 : Liste des équipements informatiques\par
+
+\subsection{Affectation du matériel}
+
+L'affectation du matériel constitue une fonctionnalité essentielle du système de gestion du parc informatique, car elle permet de relier chaque équipement à un utilisateur donné et d'assurer un suivi précis de son utilisation au sein de l'entreprise GERMA GLACES.\par
+
+Le système permet d'effectuer l'affectation des équipements à partir d'une interface dédiée, accessible aux utilisateurs disposant des droits nécessaires, notamment les administrateurs et les responsables informatiques. Lors de l'affectation, l'utilisateur bénéficiaire, l'équipement concerné ainsi que la date de début de l'affectation sont renseignés.\par
+
+Afin de garantir la cohérence des données, le système impose des règles de gestion strictes lors du processus d'affectation. Un équipement ne peut être affecté qu'à un seul utilisateur à un instant donné. Lorsqu'un équipement est déjà affecté, toute nouvelle affectation nécessite la clôture de l'affectation en cours.\par
+
+Le système assure également la mise à jour automatique de l'état de l'équipement lors de son affectation, permettant de disposer à tout moment d'une vision claire et actualisée du parc informatique.\par
+
+L'historique des affectations est conservé afin de garantir une traçabilité complète des mouvements du matériel. Chaque affectation enregistre une date de début et, le cas échéant, une date de fin, permettant de retracer les différents utilisateurs ayant disposé d'un équipement au fil du temps.\par
+
+Ainsi, la fonctionnalité d'affectation du matériel permet d'assurer une gestion rigoureuse et transparente des équipements informatiques et contribue à l'efficacité globale du système.\par
+
+Figure 4.7 : Historique des affectations des équipements\par
+
+Figure 4.6 : Interface d'affectation du matériel\par
+
+\subsection{Gestion des pannes et des interventions}
+
+La gestion des pannes et des interventions représente une fonctionnalité clé du système, car elle permet d'assurer le suivi des incidents affectant les équipements informatiques et d'organiser les actions correctives nécessaires. Cette fonctionnalité contribue directement à la continuité du service informatique et à la réduction des temps d'indisponibilité du matériel.\par
+
+Le système permet aux utilisateurs finaux de déclarer une panne à partir de leur espace personnel. Lors de cette déclaration, l'équipement concerné est sélectionné et une description du dysfonctionnement est saisie. Ces informations sont ensuite enregistrées dans le système et associées à l'utilisateur déclarant ainsi qu'à l'équipement concerné, garantissant une traçabilité complète de l'incident.\par
+
+Une fois la panne déclarée, celle-ci est prise en charge par le responsable informatique, qui peut consulter la liste des pannes en attente, analyser leur nature et décider des actions à entreprendre. Le système permet de suivre l'évolution de chaque panne à travers différents états, tels que « ouverte », « en cours de traitement » ou « clôturée ».\par
+
+Les actions techniques réalisées pour résoudre une panne sont enregistrées sous forme d'interventions. Une panne peut donner lieu à une ou plusieurs interventions, permettant de conserver un historique détaillé des opérations effectuées, des dates d'intervention et des commentaires techniques.\par
+
+Le système met également à jour l'état des équipements en fonction des incidents déclarés et des interventions réalisées. Par exemple, un équipement en panne peut être temporairement indisponible jusqu'à la résolution complète du problème.\par
+
+Ainsi, la gestion des pannes et des interventions permet d'assurer un suivi structuré et rigoureux des incidents techniques. Elle favorise une meilleure organisation du travail du service informatique, améliore la traçabilité des actions réalisées et contribue à une gestion plus efficace du parc informatique.\par
+
+Figure 4.9 : Suivi des pannes et des interventions\par
+
+Figure 4.8 : Déclaration d'une panne\par
+
+\subsection{Gestion des opérations de maintenance}
+
+La gestion des opérations de maintenance vise à assurer le bon fonctionnement et la pérennité des équipements informatiques en organisant et en traçant les actions de maintenance réalisées tout au long de leur cycle de vie. Cette fonctionnalité permet d'anticiper les défaillances, de limiter les interruptions de service et d'optimiser l'utilisation du matériel.\par
+
+Le système distingue principalement deux types de maintenance : la maintenance corrective, déclenchée à la suite d'une panne ou d'un dysfonctionnement, et la maintenance préventive, planifiée afin de réduire les risques de défaillance et de prolonger la durée de vie des équipements.\par
+
+Les opérations de maintenance sont enregistrées à partir d'une interface dédiée, accessible aux utilisateurs habilités. Pour chaque opération, les informations essentielles sont renseignées, telles que l'équipement concerné, la nature de la maintenance, la date de réalisation et une description des actions effectuées.\par
+
+Lorsqu'une maintenance est liée à une panne déclarée, le système permet d'établir un lien direct entre la panne, l'intervention et l'opération de maintenance correspondante. Cette traçabilité facilite l'analyse des incidents récurrents et permet d'identifier les équipements nécessitant une attention particulière.\par
+
+La gestion des opérations de maintenance contribue également à la mise à jour de l'état des équipements. À l'issue d'une maintenance, l'équipement peut être déclaré opérationnel, nécessiter une intervention complémentaire ou être orienté vers une procédure de réforme.\par
+
+Ainsi, la gestion des opérations de maintenance permet d'adopter une approche proactive et structurée dans le suivi technique du parc informatique. Elle améliore la qualité du service rendu et participe à une gestion plus efficace et durable des ressources informatiques.\par
+
+Figure 4.11 : Historique des opérations de maintenance\par
+
+Figure 4.10 : Enregistrement d'une opération de maintenance\par
+
+\subsection{Gestion de la mise à la réforme du matériel}
+
+La gestion de la mise à la réforme du matériel permet de traiter la fin de vie des équipements informatiques de manière structurée et traçable. Cette fonctionnalité intervient lorsque le matériel devient obsolète, irréparable ou inadapté aux besoins opérationnels.\par
+
+Le système permet d'identifier les équipements susceptibles d'être réformés, notamment à la suite de pannes répétées, de coûts de maintenance élevés ou de performances insuffisantes. À partir d'une interface dédiée, les utilisateurs habilités peuvent proposer un équipement à la réforme en précisant les motifs justifiant cette décision.\par
+
+La procédure de mise à la réforme est soumise à un processus de validation assuré par un utilisateur disposant de droits d'administration. Une fois la réforme validée, l'équipement concerné change d'état dans le système et est retiré du parc actif.\par
+
+Le système conserve l'historique des équipements réformés, incluant les dates et les motifs de réforme. Cette traçabilité permet d'analyser l'évolution du parc informatique et de faciliter la planification des opérations de renouvellement.\par
+
+La mise à la réforme entraîne également la mise à jour automatique des données associées, notamment la fin des affectations en cours et l'indisponibilité définitive de l'équipement pour toute nouvelle attribution.\par
+
+Ainsi, la gestion de la mise à la réforme permet de clôturer de manière cohérente le cycle de vie des équipements et contribue à une gestion rationnelle des ressources matérielles.\par
+
+Figure 4.13 : Liste des équipements réformés\par
+
+Figure 4.12 : Proposition de mise à la réforme d'un équipement\par
+
+\section{Interfaces utilisateur}
+
+Les interfaces utilisateur jouent un rôle essentiel dans l'adoption et l'efficacité du système de gestion du parc informatique. Elles constituent le point de contact direct entre les utilisateurs et l'application, et doivent à ce titre être claires, ergonomiques et adaptées aux besoins spécifiques de chaque profil d'utilisateur.\par
+
+L'application propose des interfaces différenciées selon les rôles, afin de présenter uniquement les fonctionnalités pertinentes pour chaque catégorie d'utilisateur. Cette approche permet de simplifier la navigation, de réduire les risques d'erreurs de manipulation et d'améliorer l'expérience globale d'utilisation du système.\par
+
+L'interface de l'administrateur offre une vue d'ensemble du système. Elle permet notamment la gestion des utilisateurs et des rôles, la supervision globale du parc informatique et l'accès aux principales fonctionnalités d'administration. Un tableau de bord synthétique peut être mis à disposition afin de présenter des informations clés.\par
+
+L'interface du responsable informatique est orientée vers la gestion opérationnelle du parc. Elle donne accès aux fonctionnalités de suivi des équipements, de gestion des affectations, de traitement des pannes, d'enregistrement des interventions et de planification des opérations de maintenance.\par
+
+L'interface de l'employé est volontairement simplifiée afin de se concentrer sur les actions essentielles. Elle permet à l'utilisateur de consulter les équipements qui lui sont affectés, de déclarer des pannes et de suivre l'état de ses demandes.\par
+
+Une attention particulière a été portée à l'ergonomie des interfaces. Les formulaires sont structurés de manière claire, les libellés sont explicites et la navigation est conçue pour être intuitive. Les messages de confirmation, d'erreur ou d'information accompagnent les actions de l'utilisateur afin de le guider.\par
+
+Les interfaces ont été conçues en cohérence avec les cas d'utilisation définis lors de l'étude conceptuelle, garantissant ainsi une continuité entre la modélisation UML et la réalisation de l'application. Les captures d'écran présentées illustrent les principales interfaces et leur adéquation avec les besoins fonctionnels identifiés.\par
+
+Ainsi, les interfaces utilisateur contribuent de manière significative à la qualité globale du système. Elles facilitent l'utilisation quotidienne de l'application et participent à une gestion plus fluide et plus fiable du parc informatique.\par
+
+Figure 4.16 : Interface Employé\par
+
+Figure 4.15 : Interface Responsable informatique\par
+
+Figure 4.14 : Interface Administrateur\par
+
+\section{Sécurité et gestion des accès}
+
+La sécurité et la gestion des accès constituent des aspects essentiels du système de gestion du parc informatique, dans la mesure où l'application manipule des données sensibles relatives aux utilisateurs, aux équipements et aux opérations techniques. L'objectif principal est de garantir que seules les personnes autorisées puissent accéder aux fonctionnalités du système et aux informations qu'il contient.\par
+
+La sécurité de l'application repose avant tout sur un mécanisme d'authentification des utilisateurs. L'accès au système nécessite une connexion préalable à l'aide d'un identifiant et d'un mot de passe. Une fois authentifié, l'utilisateur dispose d'une session active lui permettant d'interagir avec le système de manière sécurisée.\par
+
+La gestion des accès est basée sur le principe des rôles, définis lors de la conception du système. Chaque utilisateur est associé à un rôle précis, qui détermine les fonctionnalités auxquelles il peut accéder. Ce contrôle des accès par rôle permet de restreindre l'utilisation de certaines fonctionnalités sensibles aux seuls profils habilités.\par
+
+Le système met en œuvre des contrôles d'accès au niveau applicatif, empêchant l'exécution d'actions non autorisées. Les menus, les interfaces et les actions disponibles sont affichés dynamiquement en fonction du rôle de l'utilisateur connecté.\par
+
+Par ailleurs, des mesures de sécurisation des données sont appliquées lors des opérations de saisie et de traitement des informations. Les données transmises entre l'utilisateur et le serveur sont contrôlées afin de limiter les risques d'incohérences ou d'attaques.\par
+
+Enfin, la gestion des sessions contribue également à la sécurité du système. La déconnexion met fin à la session active, empêchant toute utilisation non autorisée de l'application.\par
+
+Ainsi, la sécurité et la gestion des accès assurent la protection du système et la confidentialité des données manipulées, et constituent un élément fondamental de la fiabilité de l'application.\par
+
+\section{Tests et validation du système}
+
+Les tests et la validation du système constituent une étape indispensable afin de vérifier que l'application développée répond correctement aux besoins fonctionnels définis lors de l'étude conceptuelle. Cette phase permet de s'assurer que les différentes fonctionnalités sont opérationnelles, cohérentes et conformes aux exigences exprimées par les utilisateurs.\par
+
+Les tests ont été réalisés tout au long du processus de développement, selon une approche itérative et progressive. Chaque module de l'application a été testé individuellement après son implémentation, avant d'être intégré dans l'ensemble du système. Cette démarche permet de détecter rapidement les anomalies et de corriger les dysfonctionnements à un stade précoce.\par
+
+Les principaux tests effectués concernent les fonctionnalités clés du système, notamment l'authentification des utilisateurs, la gestion des rôles, la gestion des équipements, les affectations, la déclaration des pannes, l'enregistrement des interventions, la gestion des opérations de maintenance ainsi que la mise à la réforme du matériel. Pour chaque fonctionnalité, des scénarios de test ont été définis afin de vérifier le comportement attendu du système dans des situations normales et exceptionnelles.\par
+
+Des tests fonctionnels ont été réalisés à partir des interfaces utilisateur, en simulant les actions des différents profils d'utilisateurs. Ces tests ont permis de vérifier la cohérence des interfaces, la validité des données saisies, le respect des règles de gestion et le bon enchaînement des traitements.\par
+
+La validation du système repose également sur la vérification de la cohérence des données stockées dans la base de données. Les opérations de création, de modification et de suppression ont été testées afin de garantir l'intégrité des informations et le respect des relations entre les différentes entités.\par
+
+Enfin, des tests globaux ont permis d'évaluer le comportement général du système dans un contexte d'utilisation réaliste. Ces tests ont mis en évidence la stabilité de l'application, la fiabilité des fonctionnalités implémentées et l'adéquation de la solution développée aux besoins identifiés. À l'issue de cette phase, le système peut être considéré comme fonctionnel et validé.\par
+
+\section{Limites et perspectives du système}
+
+Malgré les fonctionnalités mises en œuvre et les objectifs atteints, le système de gestion du parc informatique présente certaines limites, inhérentes au contexte du projet et aux choix techniques retenus. L'identification de ces limites permet de porter un regard critique sur la solution développée et d'envisager des perspectives d'amélioration réalistes.\par
+
+Parmi les principales limites, on peut citer le fait que l'application a été développée dans un cadre académique et expérimental, ce qui implique un périmètre fonctionnel volontairement maîtrisé. Certaines fonctionnalités avancées, telles que la génération automatique de rapports détaillés, la gestion multi-sites ou l'intégration avec d'autres systèmes d'information existants, n'ont pas été prises en charge dans cette version.\par
+
+Sur le plan technique, la solution repose sur une architecture web classique et un environnement de développement local. Bien que ce choix soit adapté aux besoins du projet et au contexte d'une PME, il limite certaines possibilités en matière de montée en charge, de haute disponibilité ou de déploiement à grande échelle. De même, les mécanismes de sécurité mis en place restent basiques et pourraient être renforcés dans un environnement de production réel.\par
+
+Du point de vue de l'utilisateur, l'ergonomie des interfaces répond aux besoins essentiels, mais pourrait être améliorée par l'ajout de fonctionnalités de personnalisation, de tableaux de bord plus interactifs ou de notifications automatiques.\par
+
+Malgré ces limites, le système offre de nombreuses perspectives d'évolution. Il pourrait notamment être enrichi par l'intégration de modules de reporting et de statistiques, facilitant l'analyse du parc informatique et l'aide à la décision. L'ajout d'un système de notifications permettrait d'améliorer le suivi des pannes, des maintenances et des affectations.\par
+
+D'autres perspectives concernent l'évolution technique de la solution, telles que le déploiement sur un serveur distant, l'amélioration des mécanismes de sécurité ou l'adaptation de l'application à des environnements mobiles. Enfin, le système pourrait être étendu afin de prendre en charge de nouveaux types d'équipements ou de nouvelles règles de gestion.\par
+
+Ainsi, bien que le système développé réponde aux objectifs fixés, il constitue avant tout une base évolutive, susceptible d'être enrichie et adaptée. Cette ouverture vers des améliorations futures confirme la pertinence de la démarche adoptée et la valeur ajoutée de la solution proposée.\par
